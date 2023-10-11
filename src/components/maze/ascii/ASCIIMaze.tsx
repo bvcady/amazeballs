@@ -14,8 +14,12 @@ interface Props {
 export const ASCIIMaze = ({ squares, nX }: Props) => {
   const { player } = useMazeStore((state) => state);
 
+  const translation = [
+    (player?.x || 0) * 32 + 32 + 16,
+    (player?.y || 0) * 32 + 32 + 16,
+  ] as [number, number];
   return (
-    <ASCIIWrapper {...{ nX }}>
+    <ASCIIWrapper {...{ nX, translation }}>
       {squares?.map((s) => {
         return (
           <CellWrapper key={s.x + "-" + s.y}>

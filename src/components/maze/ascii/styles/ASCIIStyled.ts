@@ -1,7 +1,10 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-export const ASCIIWrapper = styled("div")<{ nX?: number }>`
+export const ASCIIWrapper = styled("div")<{
+  nX?: number;
+  translation?: [number, number];
+}>`
   --nX: ${({ nX }) => nX || 10};
   --cellSize: 2rem;
 
@@ -12,6 +15,18 @@ export const ASCIIWrapper = styled("div")<{ nX?: number }>`
   background-color: var(--darkColor);
   padding: var(--cellSize);
   width: fit-content;
+
+  --tX: -${({ translation }) => translation?.[0] || 0}px;
+  --tY: -${({ translation }) => translation?.[1] || 0}px;
+
+  transform: translateX(calc(var(--tX) + 150px))
+    translateY(calc(var(--tY) + 150px));
+
+  transition: transform 0.4s linear;
+
+  user-select: none;
+  pointer-events: none;
+  cursor: none;
 `;
 
 export const CellWrapper = styled("code")<{
@@ -44,20 +59,20 @@ export const PlayerWrapper = styled(CellWrapper)`
     height: 1.5rem;
   }
 
-  .cls-1 {
-    fill: #dadada;
+  #bg * {
+    /* fill: #dadada; */
     fill: var(--bgColor);
   }
-  .cls-2 {
-    fill: #1d1d1b;
+  #dark * {
+    /* fill: #1d1d1b; */
     fill: var(--darkColor);
   }
-  .cls-3 {
-    fill: #878787;
+  #light * {
+    /* fill: #878787; */
     fill: var(--lightColor);
   }
-  .cls-4 {
-    fill: #575756;
+  #medium * {
+    /* fill: #575756; */
     fill: var(--mediumColor);
   }
 `;

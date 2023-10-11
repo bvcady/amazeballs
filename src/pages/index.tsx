@@ -2,9 +2,10 @@ import Head from "next/head";
 import { useInitializer } from "@/hooks/useInitializer";
 import { ASCIIMaze } from "@/components/maze/ascii/ASCIIMaze";
 import { useMovement } from "@/hooks/useMovement";
+import { ViewPort } from "@/components/maze/viewport/ViewPort";
 
 export default function Home() {
-  const { squares, nX } = useInitializer({ nX: 14 });
+  const { squares, nX } = useInitializer({ nX: 20 });
   const { moveHandler } = useMovement();
 
   return (
@@ -26,7 +27,9 @@ export default function Home() {
           height: "100dvh",
         }}
       >
-        <ASCIIMaze {...{ squares, nX }} />
+        <ViewPort>
+          <ASCIIMaze {...{ squares, nX }} />
+        </ViewPort>
         <div>
           <button onClick={() => moveHandler(["ArrowLeft"])}>LEFT</button>
           <button onClick={() => moveHandler(["ArrowRight"])}>RIGHT</button>

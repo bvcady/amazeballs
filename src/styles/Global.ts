@@ -2,10 +2,16 @@ import { css } from "@emotion/react";
 
 export const theme = {
   colors: {
-    background: "#e0f8d0",
-    dark: "#081820",
-    medium: "#346856",
-    light: "#88c070",
+    // background: "#fceed8",
+    // dark: "#d16c74",
+    // medium: "#faae88",
+    // light: "#faddd9",
+    // accent: "chartreuse",
+    background: "#dadada",
+    dark: "#1d1d1b",
+    medium: "#575756",
+    light: "#878787",
+    accent: "hotpink",
   },
 };
 
