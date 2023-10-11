@@ -5,8 +5,8 @@ export const ArrowButtonWrapper = styled(ButtonBase)<{
   rotation: string;
   position: "up" | "left" | "right" | "down";
 }>`
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2rem;
+  width: 2rem;
   display: grid;
   place-items: center;
   border-radius: 0.25rem;

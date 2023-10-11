@@ -34,8 +34,8 @@ export const DirectionalPad = ({ children }: Props) => {
       <div
         style={{
           gridArea: "x",
-          filter: "blur(3px)",
-          borderRadius: "100%",
+          filter: "blur(5px)",
+          borderRadius: "0.25rem",
           width: "100%",
           height: "100%",
           background: "rgba(0, 0, 0, 0.05)",
