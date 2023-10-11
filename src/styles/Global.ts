@@ -11,7 +11,7 @@ export const theme = {
     dark: "#1d1d1b",
     medium: "#575756",
     light: "#878787",
-    accent: "hotpink",
+    accent: "#d16c74",
   },
 };
 

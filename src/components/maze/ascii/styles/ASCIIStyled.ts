@@ -12,7 +12,7 @@ export const ASCIIWrapper = styled("div")<{
   grid-template-columns: repeat(var(--nX), var(--cellSize));
   grid-template-rows: repeat(var(--nX), var(--cellSize));
 
-  background-color: var(--darkColor);
+  background-color: var(--mediumColor);
   padding: var(--cellSize);
   width: fit-content;
 

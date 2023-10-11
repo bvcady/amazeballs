@@ -10,7 +10,7 @@ export const ViewPort = ({ children }: Props) => {
   return (
     <div
       style={{
-        aspectRatio: "1",
+        aspectRatio: "160/144",
         maxWidth: "min(300px, 100dvw)",
         overflow: "hidden",
         boxShadow: "0 0 0 4px var(--lightColor)",
