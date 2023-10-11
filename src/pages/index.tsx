@@ -1,9 +1,11 @@
 import Head from "next/head";
 import { useInitializer } from "@/hooks/useInitializer";
 import { ASCIIMaze } from "@/components/maze/ascii/ASCIIMaze";
+import { useMovement } from "@/hooks/useMovement";
 
 export default function Home() {
   const { squares, nX } = useInitializer({ nX: 14 });
+  const { moveHandler } = useMovement();
 
   return (
     <>
@@ -22,6 +24,12 @@ export default function Home() {
         }}
       >
         <ASCIIMaze {...{ squares, nX }} />
+        <div>
+          <button onClick={() => moveHandler(["ArrowLeft"])}>LEFT</button>
+          <button onClick={() => moveHandler(["ArrowRight"])}>RIGHT</button>
+          <button onClick={() => moveHandler(["ArrowDown"])}>DOWN</button>
+          <button onClick={() => moveHandler(["ArrowUp"])}>UP</button>
+        </div>
       </section>
     </>
   );

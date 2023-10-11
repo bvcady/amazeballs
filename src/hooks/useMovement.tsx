@@ -119,4 +119,8 @@ export const useMovement = () => {
       moveHandler(["ArrowLeft", "A"]);
     },
   });
+
+  return {
+    moveHandler,
+  };
 };

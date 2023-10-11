@@ -14,8 +14,6 @@ interface Props {
 }
 
 export const ASCIIMaze = ({ squares, nX }: Props) => {
-  useMovement();
-
   const { player, setPlayer } = useMazeStore((state) => state);
 
   console.log(player);
