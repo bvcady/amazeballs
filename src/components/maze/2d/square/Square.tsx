@@ -1,6 +1,6 @@
 import { SquareType } from "@/types/types";
 import { SquareWrapper } from "./Square.styled";
-import { Player } from "@/components/player/Player";
+import { Player } from "../player/Player";
 import { useMazeStore } from "@/store/MazeStore";
 import { getWallEdges } from "@/services/getWallEdges";
 import { getLavaEdges } from "@/services/getLavaEdges";

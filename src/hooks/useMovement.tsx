@@ -35,8 +35,6 @@ export const useMovement = () => {
       .sort(() => 0.5 - Math.random())
       .slice(0, 3);
 
-    console.log({ lavaGrowth });
-
     setSquares(
       squares.map((square) => {
         const foundInLavaGrowth = lavaGrowth?.find(
