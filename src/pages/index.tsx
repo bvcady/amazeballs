@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useInitializer } from "@/hooks/useInitializer";
 import { ASCIIMaze } from "@/components/maze/ascii/ASCIIMaze";
 import { useMovement } from "@/hooks/useMovement";
-import { ViewPort } from "@/components/maze/viewport/ViewPort";
+import { ViewPort } from "@/components/viewport/ViewPort";
 import { ArrowButton } from "@/components/controls/buttons/ArrowButton";
 import { DirectionalPad } from "@/components/controls/buttons/DirectionalPad";
 
