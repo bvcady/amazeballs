@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { theme } from "@/styles/Global";
 import { Box, Skeleton } from "@mui/material";
 import { ReactNode } from "react";
@@ -13,7 +14,7 @@ export const ViewPort = ({ children }: Props) => {
         aspectRatio: "160/144",
         maxWidth: "min(300px, 100dvw)",
         overflow: "hidden",
-        boxShadow: "0 0 0 4px var(--lightColor)",
+        boxShadow: "0 0 0 1rem var(--lightColor)",
         pointerEvents: "none",
         background: theme.colors.dark,
         position: "relative",
@@ -27,6 +28,18 @@ export const ViewPort = ({ children }: Props) => {
           zIndex: 3,
           margin: 0,
           padding: 0,
+        }}
+      />
+      <img
+        src="http://www.devrs.com/gb/files/grid4.gif"
+        alt="grid"
+        style={{
+          position: "absolute",
+          zIndex: 5,
+          height: "100%",
+          objectFit: "contain",
+          mixBlendMode: "multiply",
+          opacity: 0.1,
         }}
       />
       <div
