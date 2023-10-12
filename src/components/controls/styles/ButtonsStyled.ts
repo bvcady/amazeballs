@@ -47,6 +47,7 @@ export const DirectionalPadWrapper = styled("div")`
   place-items: center;
   position: relative;
   margin: 2rem;
+  overflow: visible;
   * {
     border-radius: 0.25rem;
   }
