@@ -5,6 +5,7 @@ import { Lava } from "./components/Lava";
 import { Floor } from "./components/Floor";
 import { useMazeStore } from "@/store/MazeStore";
 import { Player } from "./components/Player";
+import { useEffect, useState } from "react";
 
 interface Props {
   squares: SquareType[];
@@ -13,13 +14,25 @@ interface Props {
 
 export const ASCIIMaze = ({ squares, nX }: Props) => {
   const { player } = useMazeStore((state) => state);
+  const [blur, setBlur] = useState("0px");
 
   const translation = [
     (player?.x || 0) * 32 + 32 + 16,
     (player?.y || 0) * 32 + 32 + 16,
   ] as [number, number];
+
+  useEffect(() => {
+    setBlur("1px");
+
+    const blurTimeout = setTimeout(() => {
+      setBlur("0px");
+    }, 300);
+
+    return () => clearTimeout(blurTimeout);
+  }, [player]);
+
   return (
-    <ASCIIWrapper {...{ nX, translation }}>
+    <ASCIIWrapper {...{ nX, translation, blur }}>
       {squares?.map((s) => {
         return (
           <CellWrapper key={s.x + "-" + s.y}>

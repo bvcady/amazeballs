@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 export const ASCIIWrapper = styled("div")<{
   nX?: number;
   translation?: [number, number];
+  blur?: string;
 }>`
   --nX: ${({ nX }) => nX || 10};
   --cellSize: 2rem;
@@ -22,7 +23,9 @@ export const ASCIIWrapper = styled("div")<{
   transform: translateX(calc(var(--tX) + 150px))
     translateY(calc(var(--tY) + 150px));
 
-  transition: transform 0.4s linear;
+  filter: blur(${({ blur }) => blur || "0px"});
+
+  transition: transform 0.4s linear, filter 0.3s ease-out;
 
   user-select: none;
   pointer-events: none;
