@@ -42,18 +42,18 @@ export const ViewPort = ({ children }: Props) => {
           padding: 0,
         }}
       />
-      <img
-        src="http://www.devrs.com/gb/files/grid4.gif"
-        alt="grid"
+      <div
         style={{
           position: "absolute",
           zIndex: 3,
-          height: "100%",
-          objectFit: "contain",
-          mixBlendMode: "multiply",
-          opacity: 0.1,
+          inset: "0",
+          backgroundRepeat: "repeat",
+          backgroundPosition: "6px -3px",
+          backgroundImage: 'url("sprites/grid.svg")',
+          mixBlendMode: "darken",
+          opacity: 0.25,
         }}
-      />
+      ></div>
       <div
         style={{
           position: "absolute",
