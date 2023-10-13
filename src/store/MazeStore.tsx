@@ -1,4 +1,5 @@
 import { PlayerType, SquareType } from "@/types/types";
+import { RandomSeed } from "random-seed";
 import { create } from "zustand";
 
 type ZustandState = {
@@ -6,6 +7,8 @@ type ZustandState = {
   squares: SquareType[];
   setSquares: (input: SquareType[]) => void;
   setPlayer: (input: PlayerType) => void;
+  saveFile: { seed?: string | null };
+  setSaveFile: (input: { seed: string | null }) => void;
 };
 
 export const useMazeStore = create<ZustandState>((set) => ({
@@ -13,4 +16,9 @@ export const useMazeStore = create<ZustandState>((set) => ({
   squares: [],
   setSquares: (squares) => set({ squares }),
   setPlayer: (player) => set({ player }),
+  saveFile: {},
+  setSaveFile: (saveFile) => {
+    console.log({ saveFile });
+    return set({ saveFile });
+  },
 }));

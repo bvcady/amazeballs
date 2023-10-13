@@ -5,15 +5,29 @@ import { useMovement } from "@/hooks/useMovement";
 import { ViewPort } from "@/components/viewport/ViewPort";
 import { ArrowButton } from "@/components/controls/buttons/ArrowButton";
 import { DirectionalPad } from "@/components/controls/buttons/DirectionalPad";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useMazeStore } from "@/store/MazeStore";
+import { Button } from "@mui/material";
+import { useEffect } from "react";
+import { useSeeding } from "@/hooks/useSeeding";
 
 export default function Home() {
-  const { squares, nX } = useInitializer({ nX: 20 });
+  const { setNewSeed } = useSeeding();
+
+  const { squares, nX, reload } = useInitializer({ nX: 20 });
+  const { saveFile } = useMazeStore((state) => state);
+  const { seed } = saveFile;
+
+  useEffect(() => {
+    reload();
+  }, [seed]);
+
   const { moveHandler } = useMovement();
 
   return (
     <>
       <Head>
-        <title>Maze game</title>
+        <title>Inferno Descent</title>
         <meta name="description" content="amazeballs" />
         <meta
           name="viewport"
@@ -60,6 +74,8 @@ export default function Home() {
             rotation="180deg"
           />
         </DirectionalPad>
+        <span>{seed}</span>
+        <Button onClick={() => setNewSeed()}>Reload</Button>
       </section>
     </>
   );
