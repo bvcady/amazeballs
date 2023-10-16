@@ -10,6 +10,12 @@ export const ArrowButtonWrapper = styled(ButtonBase)<{
   display: grid;
   place-items: center;
   border-radius: 0.25rem;
+  border: 2px solid grey;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: -2px;
+
   ${({ rotation }) => css`
     transform: rotate(${rotation});
   `}
@@ -51,6 +57,4 @@ export const DirectionalPadWrapper = styled("div")`
   * {
     border-radius: 0.25rem;
   }
-  filter: drop-shadow(1px 1px 0.25rem rgba(0, 0, 0, 0.2))
-    drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.1));
 `;
