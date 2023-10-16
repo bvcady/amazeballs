@@ -1,10 +1,14 @@
 import { useMazeStore } from "@/store/MazeStore";
 import { SquareType } from "@/types/types";
 import { useKeyPress } from "./useKeyPress";
+import { stat } from "fs";
 
 export const useMovement = () => {
   const { squares, setSquares } = useMazeStore((state) => state);
   const { player, setPlayer } = useMazeStore((state) => state);
+  const { saveFile, setSaveFile } = useMazeStore((state) => state);
+
+  const { nMovement = 0 } = saveFile;
 
   const updateEnemies = () => {
     const lavaSquares = squares.filter((square) => square.hasLava);
@@ -45,7 +49,57 @@ export const useMovement = () => {
     );
   };
 
-  const moveHandler = (options: string[]) => {
+  const findExistingSquare = (
+    verticalDirection: "x" | "y",
+    horizontalDirection: "x" | "y",
+    deltaMove: number,
+    increment: number
+  ) => {
+    const squareFindingFunction = (square: SquareType) =>
+      square[verticalDirection] ===
+        (player?.[verticalDirection] || 0) + (deltaMove + increment) &&
+      square[horizontalDirection] === player?.[horizontalDirection];
+
+    return squares.find(squareFindingFunction);
+  };
+
+  const slide = () => {
+    const verticalDirection = Math.random() > 0.5 ? "x" : "y";
+    const horizontalDirection = Math.random() > 0.5 ? "x" : "y";
+    const increment = Math.random() > 0.5 ? -1 : 1;
+    console.log(verticalDirection, horizontalDirection, increment);
+    let deltaMove = 0;
+
+    const handleSlide = () => {
+      const exists = findExistingSquare(
+        verticalDirection,
+        horizontalDirection,
+        deltaMove,
+        increment
+      );
+      if (!exists || exists.isWall) {
+        if (!player || deltaMove === 0) {
+          return;
+        }
+        return setPlayer({
+          ...player,
+          [verticalDirection]: player?.[verticalDirection] + deltaMove,
+        });
+      }
+
+      deltaMove += increment;
+
+      handleSlide();
+    };
+
+    handleSlide();
+    updateEnemies();
+  };
+
+  const moveHandler = (options: string[], slide?: boolean) => {
+    if (nMovement <= 0) {
+      return;
+    }
     // The increment, with the direction, in which the steps are checked.
     const increment = options.some((opt) =>
       ["ArrowUp", "W", "ArrowLeft", "A"].includes(opt)
@@ -54,41 +108,35 @@ export const useMovement = () => {
       : 1;
 
     // The direction, x or y, in which should be moved.
-    const movementDirection = options.some((opt) =>
+    const verticalDirection = options.some((opt) =>
       ["ArrowUp", "W", "ArrowDown", "S"].includes(opt)
     )
       ? "y"
       : "x";
 
     // The other direction
-    const stationaryDirection = movementDirection === "y" ? "x" : "y";
+    const horizontalDirection = verticalDirection === "y" ? "x" : "y";
 
-    let deltaMove = 0;
-
-    const checkNextSquare = () => {
-      const squareFindingFunction = (square: SquareType) =>
-        square[movementDirection] ===
-          (player?.[movementDirection] || 0) + (deltaMove + increment) &&
-        square[stationaryDirection] === player?.[stationaryDirection];
-
-      const exists = squares.find(squareFindingFunction);
-
-      if (!exists || exists.isWall) {
+    const handleStep = () => {
+      const exists = findExistingSquare(
+        verticalDirection,
+        horizontalDirection,
+        0,
+        increment
+      );
+      if (exists && !exists?.isWall) {
         if (!player) {
           return;
         }
+        setSaveFile({ ...saveFile, nMovement: (saveFile.nMovement || 0) - 1 });
         return setPlayer({
           ...player,
-          [movementDirection]: player?.[movementDirection] + deltaMove,
+          [verticalDirection]: player?.[verticalDirection] + increment,
         });
       }
-
-      deltaMove += increment;
-
-      checkNextSquare();
     };
-    checkNextSquare();
-    updateEnemies();
+
+    handleStep();
   };
 
   useKeyPress({
@@ -120,5 +168,6 @@ export const useMovement = () => {
 
   return {
     moveHandler,
+    slide,
   };
 };

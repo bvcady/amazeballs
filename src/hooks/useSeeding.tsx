@@ -21,7 +21,7 @@ export const useSeeding = () => {
     if (!seed) {
       setNewSeed();
     } else {
-      setSaveFile({ ...saveFile, seed: seed });
+      setSaveFile({ ...saveFile, seed: seed, nMovement: 5 });
     }
   }, [seed]);
 

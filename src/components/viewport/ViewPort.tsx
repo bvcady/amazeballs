@@ -25,7 +25,7 @@ export const ViewPort = ({ children }: Props) => {
         style={{
           position: "absolute",
           inset: 0,
-          zIndex: 1,
+          zIndex: 2,
           margin: 0,
           padding: 0,
           background: theme.colors.accent,
@@ -37,7 +37,7 @@ export const ViewPort = ({ children }: Props) => {
         sx={{
           position: "absolute",
           inset: "-50%",
-          zIndex: 2,
+          zIndex: 3,
           margin: 0,
           padding: 0,
         }}
@@ -45,7 +45,7 @@ export const ViewPort = ({ children }: Props) => {
       <div
         style={{
           position: "absolute",
-          zIndex: 3,
+          zIndex: 4,
           inset: "0",
           backgroundRepeat: "repeat",
           backgroundPosition: "6px -3px",
@@ -60,7 +60,7 @@ export const ViewPort = ({ children }: Props) => {
           width: "2rem",
           top: "-50%",
           height: "200%",
-          zIndex: 4,
+          zIndex: 5,
           margin: 0,
           padding: 0,
           background: "rgba(255, 255, 255, 0.2)",
@@ -76,7 +76,7 @@ export const ViewPort = ({ children }: Props) => {
           top: "-50%",
           left: "3rem",
           height: "200%",
-          zIndex: 5,
+          zIndex: 6,
           margin: 0,
           padding: 0,
           background: "rgba(255, 255, 255, 0.5)",
@@ -89,7 +89,7 @@ export const ViewPort = ({ children }: Props) => {
         style={{
           position: "absolute",
           inset: 0,
-          zIndex: 5,
+          zIndex: 7,
           margin: 0,
           padding: 0,
           mixBlendMode: "hard-light",

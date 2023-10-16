@@ -10,9 +10,10 @@ export const useInitializer = ({ nX }: Props) => {
   const [squareSize, setSquareSize] = useState(0);
 
   const { setSquares, squares } = useMazeStore((state) => state);
-  const { saveFile } = useMazeStore((state) => state);
-  const { seed } = saveFile;
   const { setPlayer } = useMazeStore((state) => state);
+  const { saveFile } = useMazeStore((state) => state);
+
+  const { seed } = saveFile;
 
   const s = seedInitilizer;
 

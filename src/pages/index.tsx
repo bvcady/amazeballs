@@ -5,24 +5,38 @@ import { useMovement } from "@/hooks/useMovement";
 import { ViewPort } from "@/components/viewport/ViewPort";
 import { ArrowButton } from "@/components/controls/buttons/ArrowButton";
 import { DirectionalPad } from "@/components/controls/buttons/DirectionalPad";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useMazeStore } from "@/store/MazeStore";
 import { Button } from "@mui/material";
 import { useEffect } from "react";
 import { useSeeding } from "@/hooks/useSeeding";
+import { UI } from "@/components/maze/ascii/ui/UI";
+import { sleeper } from "@/helpers/sleeper";
 
 export default function Home() {
   const { setNewSeed } = useSeeding();
 
   const { squares, nX, reload } = useInitializer({ nX: 20 });
-  const { saveFile } = useMazeStore((state) => state);
-  const { seed } = saveFile;
+  const { saveFile, setSaveFile } = useMazeStore((state) => state);
+  const { seed, nMovement } = saveFile;
 
   useEffect(() => {
     reload();
   }, [seed]);
 
-  const { moveHandler } = useMovement();
+  const { moveHandler, slide } = useMovement();
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout> | null = null;
+    if (nMovement === 0) {
+      timeout = setTimeout(() => {
+        slide();
+        setSaveFile({ ...saveFile, nMovement: 5 });
+      }, 2000);
+    }
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [nMovement]);
 
   return (
     <>
@@ -50,6 +64,7 @@ export default function Home() {
         }}
       >
         <ViewPort>
+          <UI />
           <ASCIIMaze {...{ squares, nX }} />
         </ViewPort>
         <DirectionalPad>

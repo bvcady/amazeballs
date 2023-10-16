@@ -21,6 +21,7 @@ export const globalStyle = css`
     --darkColor: ${theme.colors.dark};
     --mediumColor: ${theme.colors.medium};
     --lightColor: ${theme.colors.light};
+    --accentColor: ${theme.colors.accent};
   }
 
   body {
