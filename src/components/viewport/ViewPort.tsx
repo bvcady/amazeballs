@@ -71,7 +71,7 @@ export const ViewPort = ({ children }: Props) => {
         }}
       ></div>
       <LightWrapper>
-        <LightStreak width="3rem" left="10%" intensity="1" />
+        <LightStreak width="3rem" left="10%" intensity="0.4" />
         <LightStreak
           width="2rem"
           left="calc(10% + 5rem)"
@@ -108,9 +108,9 @@ const BlurLayer = styled("div")<{ blur: string }>`
 const LightWrapper = styled("div")`
   position: absolute;
   inset: 0;
-  mix-blend-mode: saturation;
-  filter: blur(4px);
-  -webkit-filter: blur(4px);
+  mix-blend-mode: hard-light;
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
   z-index: 6;
 `;
 
@@ -139,22 +139,23 @@ const LightStreak = styled("div")<{
   height: 200%;
   z-index: 6;
   background-size: 200% 200%;
-  background-color: transparent;
+  background-color: white;
+  background-repeat: no-repeat;
   background-position: 84% 0;
+
   background: linear-gradient(
     48deg,
-    #e3c1f4,
-    #d9d7ed,
-    #dff7f1,
-    #acf0ff,
-    #e3c1f4,
-    #d9d7ed,
-    #dff7f1,
-    #acf0ff,
-    #e3c1f4
+    transparent,
+    var(--accentColor),
+    transparent,
+    transparent,
+    var(--accentColor),
+    transparent,
+    transparent,
+    transparent
   );
   opacity: ${({ intensity }) => intensity};
   transform: rotate(45deg);
-  animation: ${lightMovement} 30s ease-in-out infinite;
+  animation: ${lightMovement} 30s ease infinite;
   animation-delay: ${({ delay }) => delay || "0s"};
 `;
