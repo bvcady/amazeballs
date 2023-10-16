@@ -2,7 +2,7 @@
 import { useMazeStore } from "@/store/MazeStore";
 import { theme } from "@/styles/Global";
 import styled from "@emotion/styled";
-import { Box, Skeleton } from "@mui/material";
+import { Skeleton, keyframes } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
 
 interface Props {
@@ -70,8 +70,16 @@ export const ViewPort = ({ children }: Props) => {
           opacity: 0.25,
         }}
       ></div>
-      <LightStreak width="1rem" left="10%" intensity="0.2" />
-      <LightStreak width="0.125rem" left="calc(10% + 1.5rem)" intensity="0.8" />
+      <LightWrapper>
+        <LightStreak width="3rem" left="10%" intensity="1" />
+        <LightStreak
+          width="2rem"
+          left="calc(10% + 5rem)"
+          intensity="0.8"
+          delay={"10s"}
+          style={{ transform: "rotate(33deg)" }}
+        />
+      </LightWrapper>
       <div
         style={{
           position: "absolute",
@@ -97,10 +105,31 @@ const BlurLayer = styled("div")<{ blur: string }>`
   -webkit-backdrop-filter: blur(${({ blur }) => blur});
 `;
 
+const LightWrapper = styled("div")`
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: saturation;
+  filter: blur(4px);
+  z-index: 6;
+`;
+
+const lightMovement = keyframes`
+	0% {
+    background-position: 0% 0px;
+  }
+	50% {
+    background-position: 100% 1000px;
+  }
+	100% {
+    background-position: 0% 0px;
+  }
+`;
+
 const LightStreak = styled("div")<{
   width?: string;
   left?: string;
   intensity?: string;
+  delay?: string;
 }>`
   position: absolute;
   width: ${({ width }) => width || "10px"};
@@ -108,14 +137,23 @@ const LightStreak = styled("div")<{
   top: -50%;
   height: 200%;
   z-index: 6;
-  background-color: rgba(
-    255,
-    250,
-    230,
-    ${({ intensity }) => intensity || "0.5"}
+  background-size: 200% 200%;
+  background-color: transparent;
+  background-position: 84% 0;
+  background: linear-gradient(
+    48deg,
+    #e3c1f4,
+    #d9d7ed,
+    #dff7f1,
+    #acf0ff,
+    #e3c1f4,
+    #d9d7ed,
+    #dff7f1,
+    #acf0ff,
+    #e3c1f4
   );
+  opacity: ${({ intensity }) => intensity};
   transform: rotate(45deg);
-  mix-blend-mode: soft-light;
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
+  animation: ${lightMovement} 30s ease-in-out infinite;
+  animation-delay: ${({ delay }) => delay || "0s"};
 `;

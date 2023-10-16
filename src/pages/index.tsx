@@ -30,7 +30,14 @@ export default function Home() {
     if (nMovement === 0) {
       timeout = setTimeout(() => {
         slide();
-        setSaveFile({ ...saveFile, nMovement: 5 });
+        setSaveFile({
+          ...saveFile,
+          nMovement: 5,
+          slideDirection: {
+            direction: Math.random() > 0.5 ? "x" : "y",
+            increment: Math.random() > 0.5 ? 1 : -1,
+          },
+        });
       }, 2000);
     }
     return () => {

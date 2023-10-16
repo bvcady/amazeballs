@@ -13,7 +13,7 @@ export const useSeeding = () => {
       .join("")
       .toLocaleUpperCase();
     setSeed(input || newSeed);
-    setSaveFile({ ...saveFile, seed: seed });
+    setSaveFile({ ...saveFile, seed: seed, nMovement: 5 });
   };
 
   useEffect(() => {

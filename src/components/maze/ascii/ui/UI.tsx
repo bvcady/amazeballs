@@ -1,6 +1,7 @@
 import { useMazeStore } from "@/store/MazeStore";
 import { ChipBar } from "./ChipBar";
 import styled from "@emotion/styled";
+import { SlideDirectionIndicator } from "./SlideDirectionIndicator";
 
 export const UI = () => {
   const totalAmount = 5;
@@ -10,6 +11,7 @@ export const UI = () => {
   return (
     <UIWrapper>
       <ChipBar {...{ totalAmount, currentAmount, barName: "Energy" }} />
+      <SlideDirectionIndicator />
     </UIWrapper>
   );
 };
