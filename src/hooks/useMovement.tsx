@@ -65,7 +65,7 @@ export const useMovement = () => {
 
   const slide = () => {
     const verticalDirection = Math.random() > 0.5 ? "x" : "y";
-    const horizontalDirection = Math.random() > 0.5 ? "x" : "y";
+    const horizontalDirection = verticalDirection === "x" ? "y" : "x";
     const increment = Math.random() > 0.5 ? -1 : 1;
     console.log(verticalDirection, horizontalDirection, increment);
     let deltaMove = 0;
