@@ -22,14 +22,14 @@ export const SlideDirectionIndicator = () => {
     return "0deg";
   };
 
-  return <Wrapper rotation={rotation()}>U</Wrapper>;
+  return <Indicator rotation={rotation()}>U</Indicator>;
 };
 
-const Wrapper = styled("span")<{ rotation: string }>`
+const Indicator = styled("span")<{ rotation: string }>`
   position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 8px;
+  bottom: 8px;
+  right: 16px;
   color: var(--bgColor);
+  font-size: 24px;
   transform: rotate(${({ rotation }) => rotation});
 `;
