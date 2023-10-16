@@ -73,6 +73,13 @@ export const ViewPort = ({ children }: Props) => {
       <LightWrapper>
         <LightStreak width="3rem" left="10%" intensity="0.4" />
         <LightStreak
+          width="1rem"
+          left="20%"
+          intensity="0.8"
+          color="white"
+          delay="30s"
+        />
+        <LightStreak
           width="2rem"
           left="calc(10% + 5rem)"
           intensity="0.8"
@@ -112,6 +119,7 @@ const LightWrapper = styled("div")`
   filter: blur(10px);
   -webkit-filter: blur(10px);
   z-index: 6;
+  opacity: 0.5;
 `;
 
 const lightMovement = keyframes`
@@ -131,6 +139,7 @@ const LightStreak = styled("div")<{
   left?: string;
   intensity?: string;
   delay?: string;
+  color?: string;
 }>`
   position: absolute;
   width: ${({ width }) => width || "10px"};
@@ -143,19 +152,21 @@ const LightStreak = styled("div")<{
   background-repeat: no-repeat;
   background-position: 84% 0;
 
+  --color: ${({ color }) => color || theme.colors.accent};
+
   background: linear-gradient(
     48deg,
     transparent,
-    var(--accentColor),
+    var(--color),
     transparent,
     transparent,
-    var(--accentColor),
+    var(--color),
     transparent,
     transparent,
     transparent
   );
   opacity: ${({ intensity }) => intensity};
   transform: rotate(45deg);
-  animation: ${lightMovement} 30s ease infinite;
+  animation: ${lightMovement} 60s ease-in-out infinite;
   animation-delay: ${({ delay }) => delay || "0s"};
 `;
