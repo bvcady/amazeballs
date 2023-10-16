@@ -110,6 +110,7 @@ const LightWrapper = styled("div")`
   inset: 0;
   mix-blend-mode: saturation;
   filter: blur(4px);
+  -webkit-filter: blur(4px);
   z-index: 6;
 `;
 
