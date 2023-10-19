@@ -50,6 +50,10 @@ export const CellWrapper = styled("code")<{
     css`
       opacity: ${opacity};
     `};
+
+  #lava * {
+    fill: var(--mediumColor);
+  }
 `;
 
 export const PlayerWrapper = styled(CellWrapper)`
@@ -62,8 +66,7 @@ export const PlayerWrapper = styled(CellWrapper)`
     height: 1.5rem;
   }
 
-  #bg,
-  .cls-2 * {
+  #bg * {
     /* fill: #dadada; */
     fill: var(--bgColor);
   }

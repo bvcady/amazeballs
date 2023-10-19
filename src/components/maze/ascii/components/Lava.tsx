@@ -25,9 +25,12 @@ const Animation = ({ index, duration }: AnimationProps) => {
 export const Lava = () => {
   const duration = 3.5;
   return (
-    <CellWrapper customColor={theme.colors.accent}>
-      <svg viewBox="0 0 32 32" style={{ width: 32, height: 32 }}>
-        <g id="frame1">
+    <CellWrapper
+      customColor={theme.colors.accent}
+      style={{ background: theme.colors.accent }}
+    >
+      <svg id="lava" viewBox="0 0 32 32" style={{ width: 32, height: 32 }}>
+        <g>
           <rect className="cls-2" x="8" y="25" width="1" height="1" />
           <rect className="cls-2" x="8" y="25" width="1" height="1" />
           <rect className="cls-2" x="9" y="25" width="1" height="1" />
@@ -44,7 +47,7 @@ export const Lava = () => {
           <rect className="cls-2" x="23" y="13" width="1" height="1" />
           <Animation {...{ index: 0, duration }} />
         </g>
-        <g id="frame2" visibility={"hidden"}>
+        <g visibility={"hidden"}>
           <rect className="cls-2" x="7" y="25" width="1" height="1" />
           <rect className="cls-2" x="8" y="25" width="1" height="1" />
           <rect className="cls-2" x="8" y="25" width="1" height="1" />
@@ -65,7 +68,7 @@ export const Lava = () => {
           <rect className="cls-2" x="24" y="13" width="1" height="1" />
           <Animation {...{ index: 1, duration }} />
         </g>
-        <g id="frame3" visibility={"hidden"}>
+        <g visibility={"hidden"}>
           <rect className="cls-2" x="6" y="25" width="1" height="1" />
           <rect className="cls-2" x="7" y="25" width="1" height="1" />
           <rect className="cls-2" x="8" y="24" width="1" height="1" />
@@ -90,7 +93,7 @@ export const Lava = () => {
           <rect className="cls-2" x="25" y="13" width="1" height="1" />
           <Animation {...{ index: 2, duration }} />
         </g>
-        <g id="frame4" visibility={"hidden"}>
+        <g visibility={"hidden"}>
           <rect className="cls-2" x="6" y="25" width="1" height="1" />
           <rect className="cls-2" x="7" y="24" width="1" height="1" />
           <rect className="cls-2" x="8" y="23" width="1" height="1" />
@@ -115,7 +118,7 @@ export const Lava = () => {
           <rect className="cls-2" x="25" y="13" width="1" height="1" />
           <Animation {...{ index: 3, duration }} />
         </g>
-        <g id="frame5" visibility={"hidden"}>
+        <g visibility={"hidden"}>
           <rect className="cls-2" x="6" y="25" width="1" height="1" />
           <rect className="cls-2" x="7" y="24" width="1" height="1" />
           <rect className="cls-2" x="8" y="23" width="1" height="1" />
@@ -140,7 +143,7 @@ export const Lava = () => {
           <rect className="cls-2" x="25" y="13" width="1" height="1" />
           <Animation {...{ index: 4, duration }} />
         </g>
-        <g id="frame6" visibility={"hidden"}>
+        <g visibility={"hidden"}>
           <rect className="cls-2" x="10" y="21" width="1" height="1" />
           <rect className="cls-2" x="9" y="20" width="1" height="1" />
           <rect className="cls-2" x="10" y="19" width="1" height="1" />
@@ -169,7 +172,7 @@ export const Lava = () => {
           <rect className="cls-2" x="25" y="13" width="1" height="1" />
           <Animation {...{ index: 5, duration }} />
         </g>
-        <g id="frame7" visibility={"hidden"}>
+        <g visibility={"hidden"}>
           <rect className="cls-2" x="10" y="20" width="1" height="1" />
           <rect className="cls-2" x="9" y="19" width="1" height="1" />
           <rect className="cls-2" x="10" y="18" width="1" height="1" />
