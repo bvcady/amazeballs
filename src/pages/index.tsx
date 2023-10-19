@@ -15,7 +15,7 @@ import { sleeper } from "@/helpers/sleeper";
 export default function Home() {
   const { setNewSeed } = useSeeding();
 
-  const { squares, nX, reload } = useInitializer({ nX: 20 });
+  const { squares, nX, reload, seedBuilder } = useInitializer({ nX: 20 });
   const { saveFile, setSaveFile } = useMazeStore((state) => state);
   const { seed, nMovement } = saveFile;
 
@@ -72,7 +72,7 @@ export default function Home() {
       >
         <ViewPort>
           <UI />
-          <ASCIIMaze {...{ squares, nX }} />
+          <ASCIIMaze {...{ squares, nX, seedBuilder }} />
         </ViewPort>
         <DirectionalPad>
           <ArrowButton

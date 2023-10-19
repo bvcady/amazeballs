@@ -62,7 +62,8 @@ export const PlayerWrapper = styled(CellWrapper)`
     height: 1.5rem;
   }
 
-  #bg * {
+  #bg,
+  .cls-2 * {
     /* fill: #dadada; */
     fill: var(--bgColor);
   }

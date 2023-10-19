@@ -17,7 +17,6 @@ export const useSeeding = () => {
   };
 
   useEffect(() => {
-    console.log({ seed });
     if (!seed) {
       setNewSeed();
     } else {

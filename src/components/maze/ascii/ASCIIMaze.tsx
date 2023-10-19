@@ -1,18 +1,18 @@
-import { SquareType } from "@/types/types";
+import { SeedBuilder, SquareType } from "@/types/types";
 import { ASCIIWrapper, CellWrapper } from "./styles/ASCIIStyled";
 import { Wall } from "./components/Wall";
 import { Lava } from "./components/Lava";
 import { Floor } from "./components/Floor";
 import { useMazeStore } from "@/store/MazeStore";
 import { Player } from "./components/Player";
-import { useEffect, useState } from "react";
 
 interface Props {
   squares: SquareType[];
   nX: number;
+  seedBuilder: SeedBuilder;
 }
 
-export const ASCIIMaze = ({ squares, nX }: Props) => {
+export const ASCIIMaze = ({ squares, nX, seedBuilder }: Props) => {
   const { player } = useMazeStore((state) => state);
 
   const translation = [
@@ -28,7 +28,16 @@ export const ASCIIMaze = ({ squares, nX }: Props) => {
             {player?.x === s.x && player.y === s.y ? (
               <Player key={"player" + s.x + "-" + s.y} />
             ) : null}
-            {s.isWall ? <Wall /> : null}
+            {s.isWall ? (
+              <Wall
+                cracked={seedBuilder(["wall-cracked", s.x, s.y]).random() > 0.5}
+                rotation={
+                  Math.floor(
+                    seedBuilder(["wall-cracked", s.x, s.y]).random() * 4
+                  ) * 90
+                }
+              />
+            ) : null}
             {s.hasLava ? <Lava /> : null}
             {!(s.hasLava || s.isWall) ? <Floor /> : null}
           </CellWrapper>

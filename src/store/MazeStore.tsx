@@ -32,7 +32,6 @@ export const useMazeStore = create<ZustandState>((set) => ({
     },
   },
   setSaveFile: (saveFile) => {
-    console.log({ saveFile });
     return set({ saveFile });
   },
 }));

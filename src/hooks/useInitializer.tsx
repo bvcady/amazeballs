@@ -75,6 +75,7 @@ export const useInitializer = ({ nX }: Props) => {
   }, [seed]);
 
   return {
+    seedBuilder,
     squareSize,
     nX,
     squares,

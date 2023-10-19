@@ -66,7 +66,6 @@ export const useMovement = () => {
   const slide = () => {
     const { direction, increment } = slideDirection;
     const oppositeDirection = direction === "x" ? "y" : "x";
-    console.log(direction, oppositeDirection, increment);
     let deltaMove = 0;
 
     const handleSlide = () => {
