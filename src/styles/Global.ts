@@ -24,6 +24,9 @@ export const globalStyle = css`
     --accentColor: ${theme.colors.accent};
   }
 
+  * {
+    box-sizing: border-box;
+  }
   body {
     background-color: var(--bgColor);
     font-family: var(--font-sofia);

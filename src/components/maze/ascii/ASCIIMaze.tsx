@@ -22,7 +22,7 @@ export const ASCIIMaze = ({ squares, nX, seedBuilder }: Props) => {
 
   return (
     <ASCIIWrapper {...{ nX, translation }}>
-      {squares?.map((s) => {
+      {squares?.map((s, index) => {
         return (
           <CellWrapper key={s.x + "-" + s.y}>
             {player?.x === s.x && player.y === s.y ? (
@@ -38,11 +38,34 @@ export const ASCIIMaze = ({ squares, nX, seedBuilder }: Props) => {
                 }
               />
             ) : null}
-            {s.hasLava ? <Lava /> : null}
+            {s.hasLava ? (
+              <Lava neighbours={findNeighbours(s, "hasLava", squares)} />
+            ) : null}
             {!(s.hasLava || s.isWall) ? <Floor /> : null}
           </CellWrapper>
         );
       })}
     </ASCIIWrapper>
   );
+};
+
+const findNeighbours = (
+  square: SquareType,
+  key: keyof SquareType,
+  source: SquareType[]
+) => {
+  const l = source?.some(
+    (s) => s.x === square.x - 1 && s.y === square.y && s?.[key] === true
+  );
+  const r = source?.some(
+    (s) => s.x === square.x + 1 && s.y === square.y && s?.[key] === true
+  );
+  const u = source?.some(
+    (s) => s.y === square.y - 1 && s.x === square.x && s?.[key] === true
+  );
+  const d = source?.some(
+    (s) => s.y === square.y + 1 && s.x === square.x && s?.[key] === true
+  );
+
+  return { l, r, u, d };
 };
