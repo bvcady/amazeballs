@@ -23,7 +23,7 @@ export default function Home() {
     reload();
   }, [seed]);
 
-  const { moveHandler, slide } = useMovement();
+  const { moveHandler, slide, keyHistory } = useMovement();
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout> | null = null;
@@ -77,27 +77,28 @@ export default function Home() {
         <DirectionalPad>
           <ArrowButton
             position="left"
-            callback={() => moveHandler(["ArrowLeft"])}
+            callback={() => moveHandler("ArrowLeft")}
             rotation="270deg"
           />
           <ArrowButton
             position="up"
-            callback={() => moveHandler(["ArrowUp"])}
+            callback={() => moveHandler("ArrowUp")}
             rotation="0deg"
           />
           <ArrowButton
             position="right"
-            callback={() => moveHandler(["ArrowRight"])}
+            callback={() => moveHandler("ArrowRight")}
             rotation="90deg"
           />
           <ArrowButton
             position="down"
-            callback={() => moveHandler(["ArrowDown"])}
+            callback={() => moveHandler("ArrowDown")}
             rotation="180deg"
           />
         </DirectionalPad>
         <span>{seed}</span>
         <Button onClick={() => setNewSeed()}>Reload</Button>
+        {/* <pre>{JSON.stringify(keyHistory, null, 2)}</pre> */}
       </section>
     </>
   );

@@ -1,32 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { setPriority } from "os";
 import { useCallback, useEffect, useState } from "react";
 
 interface Props {
-  keys: string[];
   callback: (input?: any) => void;
 }
 
-export const useKeyPress = ({ keys, callback }: Props) => {
-  const [keyPressed, setKeyPressed] = useState<string | undefined>();
+export const useKeyPress = ({ callback }: Props) => {
+  const [keyPressed, setKeyPressed] = useState<string>("");
+  const [history, setHistory] = useState<string[]>([]);
 
-  const handler = (e: string | undefined) => {
-    if (!e) {
-      return;
-    }
-
-    if (
-      keys?.map((k) => k.toLocaleLowerCase()).includes(e?.toLocaleLowerCase())
-    ) {
-      return callback();
+  const handler = (key: string | undefined) => {
+    if (key) {
+      return callback(key);
     }
   };
 
-  useEffect(() => handler(keyPressed), [keyPressed]);
+  useEffect(() => {
+    handler(keyPressed);
+  }, [keyPressed]);
+
+  const onKeyUp = (e: KeyboardEvent) => {
+    setKeyPressed(e.key);
+    setHistory([...history, e.key]);
+  };
 
   useEffect(() => {
-    window.addEventListener("keyup", (event) => setKeyPressed(event.key));
-    window.addEventListener("keydown", () => setKeyPressed(undefined));
+    window.addEventListener("keyup", onKeyUp);
+    return () => window.removeEventListener("keyup", onKeyUp);
   }, []);
 
-  return;
+  return { history };
 };

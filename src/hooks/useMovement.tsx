@@ -1,6 +1,7 @@
 import { useMazeStore } from "@/store/MazeStore";
 import { SquareType } from "@/types/types";
 import { useKeyPress } from "./useKeyPress";
+import { useEffect, useState } from "react";
 
 export const useMovement = () => {
   const { squares, setSquares } = useMazeStore((state) => state);
@@ -9,6 +10,8 @@ export const useMovement = () => {
 
   const { nMovement = 0 } = saveFile;
   const { slideDirection } = saveFile;
+
+  const [keyHistory, setKeyHistory] = useState<string[]>([]);
 
   const updateEnemies = () => {
     const lavaSquares = squares.filter((square) => square.hasLava);
@@ -65,7 +68,6 @@ export const useMovement = () => {
 
   const slide = () => {
     const { direction, increment } = slideDirection;
-    const oppositeDirection = direction === "x" ? "y" : "x";
     let deltaMove = 0;
 
     const handleSlide = () => {
@@ -89,21 +91,35 @@ export const useMovement = () => {
     updateEnemies();
   };
 
-  const moveHandler = (options: string[], slide?: boolean) => {
+  const moveHandler = (key: string | undefined) => {
+    if (!key) {
+      return;
+    }
+
+    setKeyHistory([...keyHistory, key]);
+    const dirKeys = [
+      "ArrowUp",
+      "w",
+      "ArrowLeft",
+      "a",
+      "ArrowDown",
+      "s",
+      "ArrowRight",
+      "d",
+    ];
+
     if (nMovement <= 0) {
       return;
     }
+
+    if (!key || !dirKeys.includes(key)) {
+      return;
+    }
     // The increment, with the direction, in which the steps are checked.
-    const increment = options.some((opt) =>
-      ["ArrowUp", "W", "ArrowLeft", "A"].includes(opt)
-    )
-      ? -1
-      : 1;
+    const increment = ["ArrowUp", "w", "ArrowLeft", "a"].includes(key) ? -1 : 1;
 
     // The direction, x or y, in which should be moved.
-    const direction = options.some((opt) =>
-      ["ArrowUp", "W", "ArrowDown", "S"].includes(opt)
-    )
+    const direction = ["ArrowUp", "w", "ArrowDown", "s"].includes(key)
       ? "y"
       : "x";
 
@@ -125,34 +141,12 @@ export const useMovement = () => {
   };
 
   useKeyPress({
-    keys: ["ArrowUp", "W"],
-    callback: () => {
-      moveHandler(["ArrowUp", "W"]);
-    },
-  });
-
-  useKeyPress({
-    keys: ["ArrowDown", "S"],
-    callback: () => {
-      moveHandler(["ArrowDown", "S"]);
-    },
-  });
-
-  useKeyPress({
-    keys: ["ArrowRight", "D"],
-    callback: () => {
-      moveHandler(["ArrowRight", "D"]);
-    },
-  });
-  useKeyPress({
-    keys: ["ArrowLeft", "A"],
-    callback: () => {
-      moveHandler(["ArrowLeft", "A"]);
-    },
+    callback: moveHandler,
   });
 
   return {
     moveHandler,
     slide,
+    keyHistory,
   };
 };
