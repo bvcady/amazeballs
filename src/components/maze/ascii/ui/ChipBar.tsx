@@ -33,7 +33,8 @@ const ChipWrapper = styled("div")`
 `;
 
 const Chip = styled("div")<{ current?: boolean }>`
-  height: 4px;
+  box-sizing: content-box;
+  height: 2px;
   min-width: 3px;
   margin-top: -2px;
   border: 2px solid var(--darkColor);

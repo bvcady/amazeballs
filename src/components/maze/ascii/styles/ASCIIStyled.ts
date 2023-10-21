@@ -7,7 +7,7 @@ export const ASCIIWrapper = styled("div")<{
   blur?: string;
 }>`
   --nX: ${({ nX }) => nX || 10};
-  --cellSize: 2rem;
+  --cellSize: 32px;
 
   display: grid;
   grid-template-columns: repeat(var(--nX), var(--cellSize));
@@ -61,10 +61,6 @@ export const PlayerWrapper = styled(CellWrapper)`
   inset: 0;
   z-index: 2;
   font-size: 1.5rem;
-
-  svg {
-    height: 1.5rem;
-  }
 
   #bg * {
     /* fill: #dadada; */

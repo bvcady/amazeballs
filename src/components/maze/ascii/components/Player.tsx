@@ -3,202 +3,214 @@ import { PlayerWrapper } from "../styles/ASCIIStyled";
 export const Player = () => {
   return (
     <PlayerWrapper>
-      <svg viewBox="0 0 18 22">
+      <svg viewBox="0 0 32 32">
         <g id="bg">
-          <rect className="cls-1" x="6" y="8" width="1" height="1" />
-          <rect className="cls-1" x="11" y="8" width="1" height="1" />
+          <rect className="cls-2" x="13" y="13" width="1" height="1" />
+          <rect className="cls-2" x="18" y="13" width="1" height="1" />
           <polygon
-            className="cls-1"
-            points="15 9 15 8 14 8 14 9 14 10 15 10 15 9"
-          />
-          <polygon className="cls-1" points="4 9 4 8 3 8 3 9 3 10 4 10 4 9" />
-          <polygon
-            className="cls-1"
-            points="12 17 12 16 11 16 10 16 9 16 8 16 7 16 6 16 6 17 7 17 8 17 9 17 10 17 11 17 12 17"
+            className="cls-2"
+            points="22 14 22 13 21 13 21 14 21 15 22 15 22 14"
           />
           <polygon
-            className="cls-1"
-            points="12 19 11 19 11 20 12 20 13 20 14 20 14 19 13 19 12 19"
-          />
-          <polygon className="cls-1" points="10 4 10 3 9 3 8 3 8 4 9 4 10 4" />
-          <rect className="cls-1" x="12" y="3" width="1" height="1" />
-          <rect className="cls-1" x="5" y="3" width="1" height="1" />
-          <polygon
-            className="cls-1"
-            points="16 14 15 14 14 14 14 15 15 15 15 16 16 16 17 16 17 15 17 14 16 14"
+            className="cls-2"
+            points="11 14 11 13 10 13 10 14 10 15 11 15 11 14"
           />
           <polygon
-            className="cls-1"
-            points="5 19 4 19 4 20 5 20 6 20 7 20 7 19 6 19 5 19"
+            className="cls-2"
+            points="19 22 19 21 18 21 17 21 16 21 15 21 14 21 13 21 13 22 14 22 15 22 16 22 17 22 18 22 19 22"
           />
           <polygon
-            className="cls-1"
-            points="4 14 3 14 2 14 1 14 1 15 1 16 2 16 3 16 3 15 4 15 4 14"
+            className="cls-2"
+            points="19 24 18 24 18 25 19 25 20 25 21 25 21 24 20 24 19 24"
+          />
+          <polygon
+            className="cls-2"
+            points="17 9 17 8 16 8 15 8 15 9 16 9 17 9"
+          />
+          <rect className="cls-2" x="19" y="8" width="1" height="1" />
+          <rect className="cls-2" x="12" y="8" width="1" height="1" />
+          <polygon
+            className="cls-2"
+            points="23 19 22 19 21 19 21 20 22 20 22 21 23 21 24 21 24 20 24 19 23 19"
+          />
+          <polygon
+            className="cls-2"
+            points="12 24 11 24 11 25 12 25 13 25 14 25 14 24 13 24 12 24"
+          />
+          <polygon
+            className="cls-2"
+            points="11 19 10 19 9 19 8 19 8 20 8 21 9 21 10 21 10 20 11 20 11 19"
           />
         </g>
         <g id="light">
-          <rect className="cls-3" x="7" y="19" width="1" height="1" />
-          <rect className="cls-3" x="10" y="19" width="1" height="1" />
+          <rect className="cls-4" x="14" y="24" width="1" height="1" />
+          <rect className="cls-4" x="17" y="24" width="1" height="1" />
           <polygon
-            className="cls-3"
-            points="5 20 4 20 4 21 5 21 6 21 7 21 7 20 6 20 5 20"
+            className="cls-4"
+            points="12 25 11 25 11 26 12 26 13 26 14 26 14 25 13 25 12 25"
           />
           <polygon
-            className="cls-3"
-            points="12 20 11 20 11 21 12 21 13 21 14 21 14 20 13 20 12 20"
+            className="cls-4"
+            points="19 25 18 25 18 26 19 26 20 26 21 26 21 25 20 25 19 25"
           />
           <polygon
-            className="cls-3"
-            points="11 18 11 19 12 19 12 18 12 17 11 17 10 17 9 17 8 17 7 17 6 17 6 18 6 19 7 19 7 18 8 18 8 19 9 19 10 19 10 18 11 18"
+            className="cls-4"
+            points="18 23 18 24 19 24 19 23 19 22 18 22 17 22 16 22 15 22 14 22 13 22 13 23 13 24 14 24 14 23 15 23 15 24 16 24 17 24 17 23 18 23"
           />
           <polygon
-            className="cls-3"
-            points="11 14 10 14 9 14 8 14 7 14 6 14 6 13 5 13 4 13 4 14 5 14 5 15 6 15 7 15 8 15 9 15 10 15 11 15 12 15 13 15 13 14 14 14 14 13 13 13 12 13 12 14 11 14"
+            className="cls-4"
+            points="18 19 17 19 16 19 15 19 14 19 13 19 13 18 12 18 11 18 11 19 12 19 12 20 13 20 14 20 15 20 16 20 17 20 18 20 19 20 20 20 20 19 21 19 21 18 20 18 19 18 19 19 18 19"
           />
           <polygon
-            className="cls-3"
-            points="12 6 11 6 11 5 10 5 9 5 8 5 7 5 7 6 6 6 5 6 5 7 6 7 7 7 8 7 8 8 8 9 8 10 7 10 6 10 5 10 5 11 5 12 6 12 6 13 7 13 8 13 9 13 10 13 11 13 12 13 12 12 13 12 13 11 13 10 12 10 11 10 10 10 10 9 10 8 10 7 11 7 12 7 13 7 13 6 12 6"
+            className="cls-4"
+            points="19 11 18 11 18 10 17 10 16 10 15 10 14 10 14 11 13 11 12 11 12 12 13 12 14 12 15 12 15 13 15 14 15 15 14 15 13 15 12 15 12 16 12 17 13 17 13 18 14 18 15 18 16 18 17 18 18 18 19 18 19 17 20 17 20 16 20 15 19 15 18 15 17 15 17 14 17 13 17 12 18 12 19 12 20 12 20 11 19 11"
           />
           <polygon
-            className="cls-3"
-            points="4 6 3 6 3 7 2 7 2 8 2 9 2 10 2 11 3 11 3 10 3 9 3 8 4 8 5 8 5 7 4 7 4 6"
+            className="cls-4"
+            points="11 11 10 11 10 12 9 12 9 13 9 14 9 15 9 16 10 16 10 15 10 14 10 13 11 13 12 13 12 12 11 12 11 11"
           />
           <polygon
-            className="cls-3"
-            points="5 5 6 5 7 5 7 4 7 3 8 3 8 2 9 2 10 2 10 3 11 3 11 4 11 5 12 5 13 5 13 6 14 6 14 5 14 4 13 4 12 4 12 3 12 2 11 2 11 1 10 1 9 1 8 1 7 1 7 2 6 2 6 3 6 4 5 4 4 4 4 5 4 6 5 6 5 5"
+            className="cls-4"
+            points="12 10 13 10 14 10 14 9 14 8 15 8 15 7 16 7 17 7 17 8 18 8 18 9 18 10 19 10 20 10 20 11 21 11 21 10 21 9 20 9 19 9 19 8 19 7 18 7 18 6 17 6 16 6 15 6 14 6 14 7 13 7 13 8 13 9 12 9 11 9 11 10 11 11 12 11 12 10"
           />
           <polygon
-            className="cls-3"
-            points="15 7 15 6 14 6 14 7 13 7 13 8 14 8 15 8 15 9 15 10 15 11 16 11 16 10 16 9 16 8 16 7 15 7"
+            className="cls-4"
+            points="22 12 22 11 21 11 21 12 20 12 20 13 21 13 22 13 22 14 22 15 22 16 23 16 23 15 23 14 23 13 23 12 22 12"
           />
         </g>
         <g id="medium">
           <polygon
-            className="cls-4"
-            points="10 15 9 15 8 15 7 15 6 15 6 16 7 16 8 16 9 16 10 16 11 16 12 16 12 15 11 15 10 15"
+            className="cls-5"
+            points="17 20 16 20 15 20 14 20 13 20 13 21 14 21 15 21 16 21 17 21 18 21 19 21 19 20 18 20 17 20"
           />
           <polygon
-            className="cls-4"
-            points="10 13 9 13 8 13 7 13 6 13 6 14 7 14 8 14 9 14 10 14 11 14 12 14 12 13 11 13 10 13"
+            className="cls-5"
+            points="17 18 16 18 15 18 14 18 13 18 13 19 14 19 15 19 16 19 17 19 18 19 19 19 19 18 18 18 17 18"
           />
-          <rect className="cls-4" x="12" y="12" width="1" height="1" />
+          <rect className="cls-5" x="19" y="17" width="1" height="1" />
           <polygon
-            className="cls-4"
-            points="14 10 14 11 14 12 15 12 15 11 15 10 14 10"
-          />
-          <polygon
-            className="cls-4"
-            points="3 11 3 12 4 12 4 11 4 10 3 10 3 11"
+            className="cls-5"
+            points="21 15 21 16 21 17 22 17 22 16 22 15 21 15"
           />
           <polygon
-            className="cls-4"
-            points="10 4 9 4 8 4 7 4 7 5 8 5 9 5 10 5 11 5 11 4 10 4"
+            className="cls-5"
+            points="10 16 10 17 11 17 11 16 11 15 10 15 10 16"
           />
           <polygon
-            className="cls-4"
-            points="11 5 11 6 12 6 13 6 13 5 12 5 11 5"
+            className="cls-5"
+            points="17 9 16 9 15 9 14 9 14 10 15 10 16 10 17 10 18 10 18 9 17 9"
           />
-          <rect className="cls-4" x="6" y="1" width="1" height="1" />
-          <rect className="cls-4" x="11" y="1" width="1" height="1" />
-          <rect className="cls-4" x="12" y="2" width="1" height="1" />
-          <rect className="cls-4" x="13" y="3" width="1" height="1" />
-          <rect className="cls-4" x="5" y="2" width="1" height="1" />
-          <rect className="cls-4" x="4" y="3" width="1" height="1" />
-          <polygon className="cls-4" points="5 5 5 6 6 6 7 6 7 5 6 5 5 5" />
-          <rect className="cls-4" x="5" y="12" width="1" height="1" />
+          <polygon
+            className="cls-5"
+            points="18 10 18 11 19 11 20 11 20 10 19 10 18 10"
+          />
+          <rect className="cls-5" x="13" y="6" width="1" height="1" />
+          <rect className="cls-5" x="18" y="6" width="1" height="1" />
+          <rect className="cls-5" x="19" y="7" width="1" height="1" />
+          <rect className="cls-5" x="20" y="8" width="1" height="1" />
+          <rect className="cls-5" x="12" y="7" width="1" height="1" />
+          <rect className="cls-5" x="11" y="8" width="1" height="1" />
+          <polygon
+            className="cls-5"
+            points="12 10 12 11 13 11 14 11 14 10 13 10 12 10"
+          />
+          <rect className="cls-5" x="12" y="17" width="1" height="1" />
         </g>
         <g id="dark">
-          <rect className="cls-2" x="5" y="1" width="1" height="1" />
-          <rect className="cls-2" x="4" y="2" width="1" height="1" />
+          <rect className="cls-3" x="12" y="6" width="1" height="1" />
+          <rect className="cls-3" x="11" y="7" width="1" height="1" />
           <polygon
-            className="cls-2"
-            points="4 5 4 4 4 3 3 3 3 4 3 5 3 6 4 6 4 5"
+            className="cls-3"
+            points="11 10 11 9 11 8 10 8 10 9 10 10 10 11 11 11 11 10"
           />
-          <rect className="cls-2" x="2" y="6" width="1" height="1" />
+          <rect className="cls-3" x="9" y="11" width="1" height="1" />
           <polygon
-            className="cls-2"
-            points="2 9 2 8 2 7 1 7 1 8 1 9 1 10 1 11 2 11 2 10 2 9"
+            className="cls-3"
+            points="9 14 9 13 9 12 8 12 8 13 8 14 8 15 8 16 9 16 9 15 9 14"
           />
-          <rect className="cls-2" x="2" y="11" width="1" height="1" />
+          <rect className="cls-3" x="9" y="16" width="1" height="1" />
           <path
-            className="cls-2"
-            d="m3,14h1v-1h1v-3h3v-3h-3v1h-1v4h-1v1H1v1h2Zm4-6v1h-1v-1h1Z"
+            className="cls-3"
+            d="m10,19h1v-1h1v-3h3v-3h-3v1h-1v4h-1v1h-2v1h2Zm4-6v1h-1v-1h1Z"
           />
           <polygon
-            className="cls-2"
-            points="1 14 0 14 0 15 0 16 1 16 1 15 1 14"
+            className="cls-3"
+            points="8 19 7 19 7 20 7 21 8 21 8 20 8 19"
           />
           <polygon
-            className="cls-2"
-            points="3 16 2 16 1 16 1 17 2 17 3 17 4 17 4 16 4 15 3 15 3 16"
+            className="cls-3"
+            points="10 21 9 21 8 21 8 22 9 22 10 22 11 22 11 21 11 20 10 20 10 21"
           />
-          <rect className="cls-2" x="4" y="14" width="1" height="1" />
+          <rect className="cls-3" x="11" y="19" width="1" height="1" />
           <polygon
-            className="cls-2"
-            points="6 19 6 18 6 17 6 16 6 15 5 15 5 16 5 17 5 18 4 18 4 19 5 19 6 19"
-          />
-          <polygon
-            className="cls-2"
-            points="4 19 3 19 3 20 3 21 4 21 4 20 4 19"
+            className="cls-3"
+            points="13 24 13 23 13 22 13 21 13 20 12 20 12 21 12 22 12 23 11 23 11 24 12 24 13 24"
           />
           <polygon
-            className="cls-2"
-            points="5 21 4 21 4 22 5 22 6 22 7 22 7 21 6 21 5 21"
-          />
-          <rect className="cls-2" x="7" y="20" width="1" height="1" />
-          <rect className="cls-2" x="7" y="18" width="1" height="1" />
-          <polygon
-            className="cls-2"
-            points="8 1 9 1 10 1 11 1 12 1 12 0 11 0 10 0 9 0 8 0 7 0 6 0 6 1 7 1 8 1"
-          />
-          <rect className="cls-2" x="12" y="1" width="1" height="1" />
-          <rect className="cls-2" x="13" y="2" width="1" height="1" />
-          <polygon
-            className="cls-2"
-            points="14 5 14 6 15 6 15 5 15 4 15 3 14 3 14 4 14 5"
-          />
-          <rect className="cls-2" x="15" y="6" width="1" height="1" />
-          <polygon
-            className="cls-2"
-            points="16 9 16 10 16 11 17 11 17 10 17 9 17 8 17 7 16 7 16 8 16 9"
-          />
-          <rect className="cls-2" x="15" y="11" width="1" height="1" />
-          <polygon
-            className="cls-2"
-            points="17 14 17 15 17 16 18 16 18 15 18 14 17 14"
+            className="cls-3"
+            points="11 24 10 24 10 25 10 26 11 26 11 25 11 24"
           />
           <polygon
-            className="cls-2"
-            points="15 16 15 15 14 15 14 16 14 17 15 17 16 17 17 17 17 16 16 16 15 16"
+            className="cls-3"
+            points="12 26 11 26 11 27 12 27 13 27 14 27 14 26 13 26 12 26"
           />
-          <rect className="cls-2" x="13" y="14" width="1" height="1" />
+          <rect className="cls-3" x="14" y="25" width="1" height="1" />
+          <rect className="cls-3" x="14" y="23" width="1" height="1" />
           <polygon
-            className="cls-2"
-            points="12 16 12 17 12 18 12 19 13 19 14 19 14 18 13 18 13 17 13 16 13 15 12 15 12 16"
+            className="cls-3"
+            points="15 6 16 6 17 6 18 6 19 6 19 5 18 5 17 5 16 5 15 5 14 5 13 5 13 6 14 6 15 6"
+          />
+          <rect className="cls-3" x="19" y="6" width="1" height="1" />
+          <rect className="cls-3" x="20" y="7" width="1" height="1" />
+          <polygon
+            className="cls-3"
+            points="21 10 21 11 22 11 22 10 22 9 22 8 21 8 21 9 21 10"
+          />
+          <rect className="cls-3" x="22" y="11" width="1" height="1" />
+          <polygon
+            className="cls-3"
+            points="23 14 23 15 23 16 24 16 24 15 24 14 24 13 24 12 23 12 23 13 23 14"
+          />
+          <rect className="cls-3" x="22" y="16" width="1" height="1" />
+          <polygon
+            className="cls-3"
+            points="24 19 24 20 24 21 25 21 25 20 25 19 24 19"
           />
           <polygon
-            className="cls-2"
-            points="14 21 15 21 15 20 15 19 14 19 14 20 14 21"
+            className="cls-3"
+            points="22 21 22 20 21 20 21 21 21 22 22 22 23 22 24 22 24 21 23 21 22 21"
+          />
+          <rect className="cls-3" x="20" y="19" width="1" height="1" />
+          <polygon
+            className="cls-3"
+            points="19 21 19 22 19 23 19 24 20 24 21 24 21 23 20 23 20 22 20 21 20 20 19 20 19 21"
           />
           <polygon
-            className="cls-2"
-            points="12 21 11 21 11 22 12 22 13 22 14 22 14 21 13 21 12 21"
+            className="cls-3"
+            points="21 26 22 26 22 25 22 24 21 24 21 25 21 26"
           />
-          <rect className="cls-2" x="10" y="20" width="1" height="1" />
-          <rect className="cls-2" x="10" y="18" width="1" height="1" />
           <polygon
-            className="cls-2"
-            points="9 19 8 19 8 20 9 20 10 20 10 19 9 19"
+            className="cls-3"
+            points="19 26 18 26 18 27 19 27 20 27 21 27 21 26 20 26 19 26"
           />
-          <rect className="cls-2" x="7" y="3" width="1" height="1" />
-          <rect className="cls-2" x="13" y="6" width="1" height="1" />
-          <rect className="cls-2" x="4" y="6" width="1" height="1" />
+          <rect className="cls-3" x="17" y="25" width="1" height="1" />
+          <rect className="cls-3" x="17" y="23" width="1" height="1" />
+          <polygon
+            className="cls-3"
+            points="16 24 15 24 15 25 16 25 17 25 17 24 16 24"
+          />
+          <rect className="cls-3" x="14" y="8" width="1" height="1" />
+          <rect className="cls-3" x="20" y="11" width="1" height="1" />
+          <rect className="cls-3" x="11" y="11" width="1" height="1" />
           <path
-            className="cls-2"
-            d="m14,11v-3h-1v-1h-3v3h3v3h1v1h3v-1h-2v-1h-1v-1Zm-3-2v-1h1v1h-1Z"
+            className="cls-3"
+            d="m21,16v-3h-1v-1h-3v3h3v3h1v1h3v-1h-2v-1h-1v-1Zm-3-2v-1h1v1h-1Z"
           />
-          <polygon className="cls-2" points="10 2 9 2 8 2 8 3 9 3 10 3 10 2" />
-          <rect className="cls-2" x="10" y="3" width="1" height="1" />
+          <polygon
+            className="cls-3"
+            points="17 7 16 7 15 7 15 8 16 8 17 8 17 7"
+          />
+          <rect className="cls-3" x="17" y="8" width="1" height="1" />
         </g>
       </svg>
     </PlayerWrapper>

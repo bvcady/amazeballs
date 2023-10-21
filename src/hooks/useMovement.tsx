@@ -2,6 +2,7 @@ import { useMazeStore } from "@/store/MazeStore";
 import { SquareType } from "@/types/types";
 import { useKeyPress } from "./useKeyPress";
 import { useEffect, useState } from "react";
+import { debounce } from "@mui/material";
 
 export const useMovement = () => {
   const { squares, setSquares } = useMazeStore((state) => state);
@@ -141,7 +142,7 @@ export const useMovement = () => {
   };
 
   useKeyPress({
-    callback: moveHandler,
+    callback: debounce(moveHandler, 50),
   });
 
   return {

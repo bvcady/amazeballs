@@ -8,7 +8,6 @@ interface Props {
 
 export const useKeyPress = ({ callback }: Props) => {
   const [keyPressed, setKeyPressed] = useState<string>("");
-  const [history, setHistory] = useState<string[]>([]);
 
   const handler = (key: string | undefined) => {
     if (key) {
@@ -17,18 +16,24 @@ export const useKeyPress = ({ callback }: Props) => {
   };
 
   useEffect(() => {
-    handler(keyPressed);
+    if (keyPressed) {
+      handler(keyPressed);
+    }
   }, [keyPressed]);
 
   const onKeyUp = (e: KeyboardEvent) => {
     setKeyPressed(e.key);
-    setHistory([...history, e.key]);
+  };
+  const onKeyDown = () => {
+    setKeyPressed("");
   };
 
   useEffect(() => {
     window.addEventListener("keyup", onKeyUp);
-    return () => window.removeEventListener("keyup", onKeyUp);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("keydown", onKeyDown);
+    };
   }, []);
-
-  return { history };
 };
