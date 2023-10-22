@@ -81,6 +81,7 @@ export const PlayerWrapper = styled(CellWrapper)`
   z-index: 2;
   font-size: 1.5rem;
 
+  margin-top: -8px;
   animation: ${upAndDown} 1s linear;
   animation-iteration-count: infinite;
 

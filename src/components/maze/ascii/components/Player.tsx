@@ -218,15 +218,19 @@ export const Player = () => {
       </PlayerWrapper>
       <svg
         viewBox="0 0 32 32"
-        style={{ position: "absolute", filter: "blur(1px)" }}
+        style={{
+          position: "absolute",
+          filter: "blur(1px)",
+          opacity: 0.8,
+          mixBlendMode: "darken",
+        }}
       >
         <ellipse
           cx={16}
-          cy={27}
+          cy={24}
           rx={9}
           ry={3}
-          fill={theme.colors.dark}
-          opacity={0.8}
+          fill={theme.colors.medium}
         ></ellipse>
       </svg>
     </>
