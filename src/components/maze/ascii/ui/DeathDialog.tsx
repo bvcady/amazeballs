@@ -1,5 +1,6 @@
 import { useSeeding } from "@/hooks/useSeeding";
 import { useMazeStore } from "@/store/MazeStore";
+import { theme } from "@/styles/Global";
 
 export const DeathDialog = () => {
   const { setNewSeed } = useSeeding();
@@ -15,13 +16,15 @@ export const DeathDialog = () => {
         pointerEvents: "all",
         position: "absolute",
         inset: "0",
-        zIndex: 1000,
+        zIndex: 4,
+        background: theme.colors.light,
+        borderColor: theme.colors.dark,
       }}
     >
       <span>
         You Died
         <form method="dialog">
-          <button>
+          <button style={{ all: "unset", color: theme.colors.accent }}>
             <span>restart</span>
           </button>
         </form>
