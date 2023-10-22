@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 
 export const ASCIIWrapper = styled("div")<{
@@ -56,11 +56,33 @@ export const CellWrapper = styled("code")<{
   }
 `;
 
+const upAndDown = keyframes`
+0% {
+  transform: translateY(0px);
+}
+49% {
+  transform: translateY(0px);
+}
+50% {
+  transform: translateY(1px);
+}
+99% {
+  transform: translateY(1px);
+}
+100% {
+  transform: translateY(0px);
+}
+
+`;
+
 export const PlayerWrapper = styled(CellWrapper)`
   position: absolute;
   inset: 0;
   z-index: 2;
   font-size: 1.5rem;
+
+  animation: ${upAndDown} 1s linear;
+  animation-iteration-count: infinite;
 
   #bg * {
     /* fill: #dadada; */

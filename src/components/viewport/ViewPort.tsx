@@ -5,6 +5,7 @@ import { theme } from "@/styles/Global";
 import styled from "@emotion/styled";
 import { Skeleton, keyframes } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
+import { DeathDialog } from "../maze/ascii/ui/DeathDialog";
 
 interface Props {
   children: ReactNode;
@@ -39,25 +40,7 @@ export const ViewPort = ({ children }: Props) => {
         borderRadius: "0.25rem",
       }}
     >
-      <dialog
-        open={nHealth <= 0}
-        onClose={() => setNewSeed()}
-        style={{
-          pointerEvents: "all",
-          position: "absolute",
-          inset: "0",
-          zIndex: 1000,
-        }}
-      >
-        <span>
-          You Died
-          <form method="dialog">
-            <button>
-              <span>restart</span>
-            </button>
-          </form>
-        </span>
-      </dialog>
+      <DeathDialog />
       <div
         style={{
           position: "absolute",
