@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { useSeeding } from "@/hooks/useSeeding";
 import { useMazeStore } from "@/store/MazeStore";
 import { theme } from "@/styles/Global";
 import styled from "@emotion/styled";
@@ -10,8 +11,10 @@ interface Props {
 }
 
 export const ViewPort = ({ children }: Props) => {
-  const { player } = useMazeStore((state) => state);
+  const { player, saveFile } = useMazeStore((state) => state);
+  const { nHealth } = saveFile;
   const [blur, setBlur] = useState("0px");
+  const { setNewSeed } = useSeeding();
 
   useEffect(() => {
     setBlur("0.5px");
@@ -36,6 +39,25 @@ export const ViewPort = ({ children }: Props) => {
         borderRadius: "0.25rem",
       }}
     >
+      <dialog
+        open={nHealth <= 0}
+        onClose={() => setNewSeed()}
+        style={{
+          pointerEvents: "all",
+          position: "absolute",
+          inset: "0",
+          zIndex: 1000,
+        }}
+      >
+        <span>
+          You Died
+          <form method="dialog">
+            <button>
+              <span>restart</span>
+            </button>
+          </form>
+        </span>
+      </dialog>
       <div
         style={{
           position: "absolute",
@@ -47,7 +69,7 @@ export const ViewPort = ({ children }: Props) => {
           mixBlendMode: "soft-light",
         }}
       />
-      <BlurLayer blur={blur} />
+      <BlurLayer blur={nHealth === 0 ? "10px" : blur} />
       <Skeleton
         animation="wave"
         sx={{

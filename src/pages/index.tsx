@@ -10,34 +10,29 @@ import { Button } from "@mui/material";
 import { useEffect } from "react";
 import { useSeeding } from "@/hooks/useSeeding";
 import { UI } from "@/components/maze/ascii/ui/UI";
-import { sleeper } from "@/helpers/sleeper";
+import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 
 export default function Home() {
   const { setNewSeed } = useSeeding();
 
   const { squares, nX, reload, seedBuilder } = useInitializer({ nX: 20 });
-  const { saveFile, setSaveFile } = useMazeStore((state) => state);
-  const { seed, nMovement } = saveFile;
+  const { saveFile } = useMazeStore((state) => state);
+  const { seed, nMovement, nHealth } = saveFile;
 
   useEffect(() => {
     reload();
   }, [seed]);
 
-  const { moveHandler, slide, keyHistory } = useMovement();
+  useEffect(() => {
+    console.log({ nHealth });
+  }, [nHealth]);
+  const { moveHandler, slide } = useMovement();
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout> | null = null;
     if (nMovement === 0) {
       timeout = setTimeout(() => {
         slide();
-        setSaveFile({
-          ...saveFile,
-          nMovement: 5,
-          slideDirection: {
-            direction: Math.random() > 0.5 ? "x" : "y",
-            increment: Math.random() > 0.5 ? 1 : -1,
-          },
-        });
       }, 2000);
     }
     return () => {
@@ -98,7 +93,6 @@ export default function Home() {
         </DirectionalPad>
         <span>{seed}</span>
         <Button onClick={() => setNewSeed()}>Reload</Button>
-        {/* <pre>{JSON.stringify(keyHistory, null, 2)}</pre> */}
       </section>
     </>
   );

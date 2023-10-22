@@ -5,14 +5,21 @@ interface Props {
   currentAmount: number;
   totalAmount: number;
   barName: string;
+  color?: string;
 }
 
-export const ChipBar = ({ currentAmount, totalAmount, barName }: Props) => {
+export const ChipBar = ({
+  currentAmount,
+  totalAmount,
+  barName,
+  color,
+}: Props) => {
   const chips = new Array(totalAmount).fill("");
   return (
     <ChipWrapper>
       {chips?.map((_, index) => (
         <Chip
+          color={color}
           key={[barName, index]?.join("-")}
           current={index <= currentAmount - 1}
         />
@@ -46,10 +53,10 @@ const Chip = styled("div")<{ current?: boolean }>`
     border-right: 2px solid var(--darkColor);
   }
 
-  ${({ current }) =>
+  ${({ current, color }) =>
     current &&
     css`
       min-width: 8px;
-      background-color: var(--accentColor);
+      background-color: ${color || `var(--accentColor)`};
     `};
 `;

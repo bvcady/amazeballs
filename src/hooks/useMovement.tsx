@@ -3,6 +3,7 @@ import { SquareType } from "@/types/types";
 import { useKeyPress } from "./useKeyPress";
 import { useEffect, useState } from "react";
 import { debounce } from "@mui/material";
+import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 
 export const useMovement = () => {
   const { squares, setSquares } = useMazeStore((state) => state);
@@ -70,6 +71,7 @@ export const useMovement = () => {
   const slide = () => {
     const { direction, increment } = slideDirection;
     let deltaMove = 0;
+    let hadLava = false;
 
     const handleSlide = () => {
       const exists = findExistingSquare(direction, deltaMove, increment);
@@ -77,6 +79,7 @@ export const useMovement = () => {
         if (!player || deltaMove === 0) {
           return;
         }
+
         return setPlayer({
           ...player,
           [direction]: player?.[direction] + deltaMove,
@@ -85,10 +88,22 @@ export const useMovement = () => {
 
       deltaMove += increment;
 
+      if (exists?.hasLava) {
+        hadLava = true;
+      }
       handleSlide();
     };
 
     handleSlide();
+    setSaveFile({
+      ...saveFile,
+      nMovement: defaultPlayerInfo.nMovement,
+      nHealth: hadLava ? saveFile.nHealth - 1 : saveFile.nHealth,
+      slideDirection: {
+        direction: Math.random() > 0.5 ? "x" : "y",
+        increment: Math.random() > 0.5 ? 1 : -1,
+      },
+    });
     updateEnemies();
   };
 
@@ -126,11 +141,12 @@ export const useMovement = () => {
 
     const handleStep = () => {
       const exists = findExistingSquare(direction, 0, increment);
-      if (exists && !exists?.isWall) {
-        if (!player) {
-          return;
-        }
-        setSaveFile({ ...saveFile, nMovement: (saveFile.nMovement || 0) - 1 });
+      if (exists && !exists?.isWall && player) {
+        setSaveFile({
+          ...saveFile,
+          nMovement: (saveFile.nMovement || 0) - 1,
+          nHealth: exists.hasLava ? saveFile.nHealth - 1 : saveFile.nHealth,
+        });
         return setPlayer({
           ...player,
           [direction]: player?.[direction] + increment,

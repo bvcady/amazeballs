@@ -5,7 +5,8 @@ import { create } from "zustand";
 type SaveFile = {
   seed?: string | null;
   layer?: number;
-  nMovement?: number;
+  nMovement: number;
+  nHealth: number;
   slideDirection: { direction: "x" | "y"; increment: number };
 };
 
@@ -25,7 +26,8 @@ export const useMazeStore = create<ZustandState>((set) => ({
   setPlayer: (player) => set({ player }),
   saveFile: {
     layer: 0,
-    nMovement: 5,
+    nMovement: 10,
+    nHealth: 4,
     slideDirection: {
       direction: Math.random() > 0.5 ? "x" : "y",
       increment: Math.random() > 0.5 ? 1 : -1,

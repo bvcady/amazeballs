@@ -38,7 +38,12 @@ interface Props {
 export const Lava = ({ neighbours }: Props) => {
   const duration = 3.5;
 
+  // whether the neighbours have lava
   const { l, r, u, d, ul, ur, dl, dr } = neighbours;
+
+  // spacing
+  const s = 3;
+
   return (
     <CellWrapper
       style={{
@@ -51,15 +56,15 @@ export const Lava = ({ neighbours }: Props) => {
         id="top-bottom"
         style={{
           position: "absolute",
-          borderRadius: 4,
-          top: u ? 0 : 2,
-          bottom: d ? 0 : 2,
-          borderTopLeftRadius: u || l ? 0 : 4,
-          borderTopRightRadius: u || r ? 0 : 4,
-          borderBottomLeftRadius: d || l ? 0 : 4,
-          borderBottomRightRadius: d || r ? 0 : 4,
-          left: (ul || dl) && l ? 0 : 2,
-          right: (ur || dr) && r ? 0 : 2,
+          borderRadius: s,
+          top: u ? 0 : s,
+          bottom: d ? 0 : s,
+          borderTopLeftRadius: u || l ? 0 : s,
+          borderTopRightRadius: u || r ? 0 : s,
+          borderBottomLeftRadius: d || l ? 0 : s,
+          borderBottomRightRadius: d || r ? 0 : s,
+          left: (ul || dl) && l ? 0 : s,
+          right: (ur || dr) && r ? 0 : s,
           zIndex: -1,
           background: "tomato",
         }}
@@ -68,15 +73,15 @@ export const Lava = ({ neighbours }: Props) => {
         id="left-right"
         style={{
           position: "absolute",
-          borderRadius: 4,
-          left: l ? 0 : 2,
-          right: r ? 0 : 2,
-          borderTopLeftRadius: u || l ? 0 : 4,
-          borderTopRightRadius: u || r ? 0 : 4,
-          borderBottomLeftRadius: d || l ? 0 : 4,
-          borderBottomRightRadius: d || r ? 0 : 4,
-          bottom: (dl || dr) && d ? 0 : 2,
-          top: (ul || ur) && u ? 0 : 2,
+          borderRadius: s,
+          left: l ? 0 : s,
+          right: r ? 0 : s,
+          borderTopLeftRadius: u || l ? 0 : s,
+          borderTopRightRadius: u || r ? 0 : s,
+          borderBottomLeftRadius: d || l ? 0 : s,
+          borderBottomRightRadius: d || r ? 0 : s,
+          bottom: (dl || dr) && d ? 0 : s,
+          top: (ul || ur) && u ? 0 : s,
           zIndex: -1,
           background: "tomato",
         }}
