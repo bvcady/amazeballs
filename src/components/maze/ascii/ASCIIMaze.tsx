@@ -22,7 +22,7 @@ export const ASCIIMaze = ({ squares, nX, seedBuilder }: Props) => {
 
   return (
     <ASCIIWrapper {...{ nX, translation }}>
-      {squares?.map((s, index) => {
+      {squares?.map((s) => {
         return (
           <CellWrapper key={s.x + "-" + s.y}>
             {player?.x === s.x && player.y === s.y ? (
@@ -67,5 +67,18 @@ const findNeighbours = (
     (s) => s.y === square.y + 1 && s.x === square.x && s?.[key] === true
   );
 
-  return { l, r, u, d };
+  const ur = source?.some(
+    (s) => s.x === square.x + 1 && s.y === square.y - 1 && s?.[key] === true
+  );
+  const dr = source?.some(
+    (s) => s.x === square.x + 1 && s.y === square.y + 1 && s?.[key] === true
+  );
+  const ul = source?.some(
+    (s) => s.x === square.x - 1 && s.y === square.y - 1 && s?.[key] === true
+  );
+  const dl = source?.some(
+    (s) => s.x === square.x - 1 && s.y === square.y + 1 && s?.[key] === true
+  );
+
+  return { l, r, u, d, ur, dr, ul, dl };
 };

@@ -52,7 +52,7 @@ export const CellWrapper = styled("code")<{
     `};
 
   #lava * {
-    fill: var(--mediumColor);
+    fill: var(--darkColor);
   }
 `;
 
