@@ -15,6 +15,9 @@ export const ASCIIWrapper = styled("div")<{
 
   background-color: var(--lightColor);
   padding: var(--cellSize);
+  box-shadow: inset 0 0 12px 24px var(--darkColor),
+    inset 0 0 4px 8px var(--darkColor);
+
   width: fit-content;
 
   --tX: -${({ translation }) => translation?.[0] || 0}px;

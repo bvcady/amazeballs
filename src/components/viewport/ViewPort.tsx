@@ -37,7 +37,6 @@ export const ViewPort = ({ children }: Props) => {
         pointerEvents: "none",
         background: theme.colors.dark,
         position: "relative",
-        borderRadius: "0.25rem",
       }}
     >
       <DeathDialog />
