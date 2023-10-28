@@ -4,7 +4,7 @@ import { Wall } from "./components/Wall";
 import { Lava } from "./components/Lava";
 import { Floor } from "./components/Floor";
 import { useMazeStore } from "@/store/MazeStore";
-import { Player } from "./components/Player";
+import { Player } from "./components/player/Player";
 
 interface Props {
   squares: SquareType[];

@@ -1,7 +1,11 @@
-import { theme } from "@/styles/Global";
-import { PlayerWrapper } from "../styles/ASCIIStyled";
+import { useMazeStore } from "@/store/MazeStore";
+import { PlayerWrapper, ShadowWrapper } from "./PlayerStyles";
+import { PlayerWarning } from "./PlayerWarning";
 
 export const Player = () => {
+  const { saveFile } = useMazeStore((state) => state);
+  const { nMovement } = saveFile;
+
   return (
     <>
       <PlayerWrapper>
@@ -215,24 +219,18 @@ export const Player = () => {
             <rect className="cls-3" x="17" y="8" width="1" height="1" />
           </g>
         </svg>
+        {nMovement <= 3 ? (
+          <PlayerWarning
+            key={`playerMovement-${nMovement}`}
+            value={nMovement}
+          />
+        ) : null}
       </PlayerWrapper>
-      <svg
-        viewBox="0 0 32 32"
-        style={{
-          position: "absolute",
-          filter: "blur(1px)",
-          opacity: 0.8,
-          mixBlendMode: "darken",
-        }}
-      >
-        <ellipse
-          cx={16}
-          cy={24}
-          rx={9}
-          ry={3}
-          fill={theme.colors.medium}
-        ></ellipse>
-      </svg>
+      <ShadowWrapper>
+        <svg viewBox="0 0 32 32">
+          <ellipse cx={16} cy={24} rx={9} ry={3}></ellipse>
+        </svg>
+      </ShadowWrapper>
     </>
   );
 };
