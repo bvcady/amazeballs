@@ -15,7 +15,6 @@ export const ViewPort = ({ children }: Props) => {
   const { player, saveFile } = useMazeStore((state) => state);
   const { nHealth } = saveFile;
   const [blur, setBlur] = useState("0px");
-  const { setNewSeed } = useSeeding();
 
   useEffect(() => {
     setBlur("0.5px");
@@ -51,7 +50,7 @@ export const ViewPort = ({ children }: Props) => {
           mixBlendMode: "soft-light",
         }}
       />
-      <BlurLayer blur={nHealth === 0 ? "10px" : blur} />
+      <BlurLayer blur={nHealth <= 0 ? "10px" : blur} />
       <Skeleton
         animation="wave"
         sx={{

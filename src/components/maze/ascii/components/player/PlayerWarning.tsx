@@ -2,13 +2,14 @@ import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 
 interface Props {
-  value?: number;
+  value?: number | string;
 }
 
 export const PlayerWarning = ({ value }: Props) => {
+  const message = typeof value === "number" ? (value > 0 ? value : "") : value;
   return (
     <Wrapper>
-      <SpeachBubble>{value && value > 0 ? value : "aah"}</SpeachBubble>
+      <SpeachBubble>{message || "aah"}</SpeachBubble>
     </Wrapper>
   );
 };

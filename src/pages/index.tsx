@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Head from "next/head";
 import { useInitializer } from "@/hooks/useInitializer";
 import { ASCIIMaze } from "@/components/maze/ascii/ASCIIMaze";
@@ -23,9 +24,6 @@ export default function Home() {
     reload();
   }, [seed]);
 
-  useEffect(() => {
-    console.log({ nHealth });
-  }, [nHealth]);
   const { moveHandler, slide } = useMovement();
 
   useEffect(() => {

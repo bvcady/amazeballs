@@ -10,6 +10,7 @@ export type SquareType = {
 export type PlayerType = {
   x: number;
   y: number;
+  message?: string;
 };
 
 export type SeedBuilder = (

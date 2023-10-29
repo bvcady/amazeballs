@@ -12,6 +12,7 @@ export const useMovement = () => {
 
   const { nMovement = 0 } = saveFile;
   const { slideDirection } = saveFile;
+  const { nHealth } = saveFile;
 
   const [keyHistory, setKeyHistory] = useState<string[]>([]);
 
@@ -69,9 +70,10 @@ export const useMovement = () => {
   };
 
   const slide = () => {
-    const { direction, increment } = slideDirection;
+    const { direction = "x", increment = -1 } = slideDirection;
     let deltaMove = 0;
     let hadLava = false;
+    const healthDeficit = () => (hadLava ? 1 : 0) + (deltaMove <= -3 ? 1 : 0);
 
     const handleSlide = () => {
       const exists = findExistingSquare(direction, deltaMove, increment);
@@ -83,6 +85,7 @@ export const useMovement = () => {
         return setPlayer({
           ...player,
           [direction]: player?.[direction] + deltaMove,
+          message: healthDeficit() >= 1 ? "ouch" : undefined,
         });
       }
 
@@ -98,16 +101,20 @@ export const useMovement = () => {
     setSaveFile({
       ...saveFile,
       nMovement: defaultPlayerInfo.nMovement,
-      nHealth: hadLava ? saveFile.nHealth - 1 : saveFile.nHealth,
+      nHealth: saveFile.nHealth - healthDeficit(),
       slideDirection: {
         direction: Math.random() > 0.5 ? "x" : "y",
         increment: Math.random() > 0.5 ? 1 : -1,
       },
+      nSlides: saveFile.nSlides + 1,
     });
     updateEnemies();
   };
 
   const moveHandler = (key: string | undefined) => {
+    if (nHealth <= 0) {
+      return;
+    }
     if (!key) {
       return;
     }
@@ -150,6 +157,7 @@ export const useMovement = () => {
         return setPlayer({
           ...player,
           [direction]: player?.[direction] + increment,
+          message: exists.hasLava ? "ouch" : undefined,
         });
       }
     };

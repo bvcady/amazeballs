@@ -3,8 +3,9 @@ import { PlayerWrapper, ShadowWrapper } from "./PlayerStyles";
 import { PlayerWarning } from "./PlayerWarning";
 
 export const Player = () => {
-  const { saveFile } = useMazeStore((state) => state);
+  const { saveFile, player } = useMazeStore((state) => state);
   const { nMovement } = saveFile;
+  const playerMessage = player?.message;
 
   return (
     <>
@@ -219,10 +220,10 @@ export const Player = () => {
             <rect className="cls-3" x="17" y="8" width="1" height="1" />
           </g>
         </svg>
-        {nMovement <= 3 ? (
+        {nMovement <= 3 || playerMessage ? (
           <PlayerWarning
             key={`playerMovement-${nMovement}`}
-            value={nMovement}
+            value={playerMessage || nMovement}
           />
         ) : null}
       </PlayerWrapper>

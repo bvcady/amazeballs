@@ -11,7 +11,7 @@ export const useInitializer = ({ nX }: Props) => {
 
   const { setSquares, squares } = useMazeStore((state) => state);
   const { setPlayer } = useMazeStore((state) => state);
-  const { saveFile } = useMazeStore((state) => state);
+  const { saveFile, setSaveFile } = useMazeStore((state) => state);
 
   const { seed } = saveFile;
 
@@ -23,17 +23,18 @@ export const useInitializer = ({ nX }: Props) => {
     return s.create(seedString);
   };
 
+  const withinRange = (input: number, from: number, to: number) => {
+    if (input >= from && input <= to) {
+      return input;
+    }
+    if (input < from) {
+      return from;
+    }
+    return to;
+  };
+
   const reload = () => {
     if (seed) {
-      const withinRange = (input: number, from: number, to: number) => {
-        if (input >= from && input <= to) {
-          return input;
-        }
-        if (input < from) {
-          return from;
-        }
-        return to;
-      };
       setSquareSize(withinRange((window.innerWidth * 0.66) / nX, 4, 32));
 
       const maze = new Array(nX * nX).fill("").map((_, index) => {
@@ -67,6 +68,24 @@ export const useInitializer = ({ nX }: Props) => {
         ];
 
       setPlayer(player);
+      setSaveFile({
+        ...saveFile,
+        slideDirection: {
+          direction:
+            seedBuilder([
+              `slide-direction-${saveFile.nSlides}-${saveFile.layer}`,
+            ]).random() > 0.5
+              ? "x"
+              : "y",
+          increment:
+            seedBuilder([
+              `slide-increment-${saveFile.nSlides}-${saveFile.layer}`,
+            ]).random() > 0.5
+              ? -1
+              : 1,
+        },
+        nSlides: 0,
+      });
     }
   };
 

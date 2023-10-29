@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useMazeStore } from "@/store/MazeStore";
 import { useLocalStorage } from "./useLocalStorage";
 import { useEffect } from "react";
@@ -20,7 +21,6 @@ export const useSeeding = () => {
   };
 
   useEffect(() => {
-    console.log({ seed });
     if (!seed) {
       setNewSeed();
     } else {

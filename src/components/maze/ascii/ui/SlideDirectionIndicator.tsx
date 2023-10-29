@@ -22,7 +22,7 @@ export const SlideDirectionIndicator = () => {
     return "0deg";
   };
 
-  return <Indicator rotation={rotation()}>U</Indicator>;
+  return <Indicator rotation={rotation()}>▵</Indicator>;
 };
 
 const Indicator = styled("span")<{ rotation: string }>`
