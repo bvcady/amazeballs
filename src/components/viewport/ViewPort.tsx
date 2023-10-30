@@ -6,6 +6,7 @@ import { Wrapper } from "./ViewPort.styles";
 import { Grid } from "./Grid";
 import { Light } from "./light/Light";
 import { ScreenEdge } from "./ScreenEdge";
+import { Blur } from "./Blur";
 
 interface Props {
   children: ReactNode;
@@ -16,6 +17,7 @@ export const ViewPort = ({ children }: Props) => {
     <Wrapper>
       <DeathDialog />
       <Coloring />
+      <Blur />
       <Skeleton
         animation="wave"
         sx={{

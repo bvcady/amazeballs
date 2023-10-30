@@ -20,7 +20,7 @@ export const Blur = () => {
     return () => clearTimeout(blurTimeout);
   }, [player]);
 
-  <BlurLayer blur={playerIsDead ? "10px" : blur} />;
+  return <BlurLayer blur={playerIsDead ? "10px" : blur} />;
 };
 
 const BlurLayer = styled("div")<{ blur: string }>`
