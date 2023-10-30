@@ -6,11 +6,12 @@ export const Player = () => {
   const { saveFile, player } = useMazeStore((state) => state);
   const { nMovement } = saveFile;
   const playerMessage = player?.message;
+  const position = [player?.x || 0, player?.y || 0];
 
   return (
     <>
-      <PlayerWrapper>
-        <svg viewBox="0 0 32 32">
+      <PlayerWrapper id={"Player"} {...{ position }}>
+        <svg id="player-sprite" viewBox="0 0 32 32">
           <g id="bg">
             <rect className="cls-2" x="13" y="13" width="1" height="1" />
             <rect className="cls-2" x="18" y="13" width="1" height="1" />
@@ -221,12 +222,12 @@ export const Player = () => {
           </g>
         </svg>
         <PlayerWarning {...{ nMovement, playerMessage }} />
+        <ShadowWrapper>
+          <svg viewBox="0 0 32 32">
+            <ellipse cx={16} cy={24} rx={9} ry={3}></ellipse>
+          </svg>
+        </ShadowWrapper>
       </PlayerWrapper>
-      <ShadowWrapper>
-        <svg viewBox="0 0 32 32">
-          <ellipse cx={16} cy={24} rx={9} ry={3}></ellipse>
-        </svg>
-      </ShadowWrapper>
     </>
   );
 };

@@ -6,6 +6,8 @@ export type SquareType = {
   isWall?: boolean;
   isLavaSource?: boolean;
   hasLava?: boolean;
+  wallCracked?: boolean;
+  wallRotation?: number;
 };
 
 export type PlayerType = {

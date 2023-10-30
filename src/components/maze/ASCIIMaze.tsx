@@ -35,34 +35,21 @@ export const ASCIIMaze = ({ squares, nX, seedBuilder }: Props) => {
       }}
     >
       <ASCIIWrapper {...{ nX, translation }}>
-        {squares?.map((s) => {
-          return (
-            <CellWrapper key={s.x + "-" + s.y}>
-              {player?.x === s.x && player.y === s.y ? (
-                <Player key={"player" + s.x + "-" + s.y} />
-              ) : null}
-              {s.isWall ? (
-                <Wall
-                  cracked={
-                    seedBuilder(["wall-cracked", s.x, s.y]).random() > 0.5
-                  }
-                  rotation={
-                    Math.floor(
-                      seedBuilder(["wall-cracked", s.x, s.y]).random() * 4
-                    ) * 90
-                  }
-                />
-              ) : null}
-              {s.hasLava ? (
-                <Lava
-                  neighbours={findNeighbours(s, "hasLava", squares)}
-                  isLavaSource={s.isLavaSource}
-                />
-              ) : null}
-              {!(s.hasLava || s.isWall) ? <Floor /> : null}
-            </CellWrapper>
-          );
-        })}
+        {squares?.map((s) => (
+          <CellWrapper key={s.x + "-" + s.y}>
+            {s.isWall ? (
+              <Wall cracked={s.wallCracked!} rotation={s.wallRotation!} />
+            ) : null}
+            {s.hasLava ? (
+              <Lava
+                neighbours={findNeighbours(s, "hasLava", squares)}
+                isLavaSource={s.isLavaSource}
+              />
+            ) : null}
+            {!(s.hasLava || s.isWall) ? <Floor /> : null}
+          </CellWrapper>
+        ))}
+        <Player />
       </ASCIIWrapper>
     </div>
   );

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { CellWrapper } from "@/styles/shared/Shared.styles";
-import { keyframes } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 
 const upAndDown = keyframes`
 0% {
@@ -21,15 +21,30 @@ const upAndDown = keyframes`
 
 `;
 
-export const PlayerWrapper = styled(CellWrapper)`
+export const PlayerWrapper = styled(CellWrapper)<{
+  position: number[];
+}>`
+  width: 32px;
+  height: 32px;
   position: absolute;
-  inset: 0;
+  top: 4px;
+  left: 0;
   z-index: 2;
   font-size: 1.5rem;
-
+  box-shadow: 1px solid black;
   margin-top: -8px;
-  animation: ${upAndDown} 1s linear;
-  animation-iteration-count: infinite;
+
+  ${({ position }) => css`
+    transform: translateX(${position[0] * 32 + 32}px)
+      translateY(${position[1] * 32 + 32}px);
+  `}
+
+  transition: transform 0.3s ease-out;
+
+  #player-sprite {
+    animation: ${upAndDown} 1s linear;
+    animation-iteration-count: infinite;
+  }
 
   #bg * {
     /* fill: #dadada; */
@@ -51,10 +66,12 @@ export const PlayerWrapper = styled(CellWrapper)`
 
 export const ShadowWrapper = styled("div")`
   position: absolute;
+  inset: 0;
+  transform: translateY(5px);
+
   filter: blur(1px);
   opacity: 0.8;
   mix-blend-mode: darken;
-  inset: 0;
 
   ellipse {
     fill: var(--mediumColor);

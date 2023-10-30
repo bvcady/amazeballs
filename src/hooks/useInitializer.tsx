@@ -2,6 +2,7 @@
 import { useMazeStore } from "@/store/MazeStore";
 import { useEffect, useState } from "react";
 import * as seedInitilizer from "random-seed";
+import { SquareType } from "@/types/types";
 
 interface Props {
   nX: number;
@@ -37,29 +38,28 @@ export const useInitializer = ({ nX }: Props) => {
     if (seed) {
       setSquareSize(withinRange((window.innerWidth * 0.66) / nX, 4, 32));
 
-      const maze = new Array(nX * nX).fill("").map((_, index) => {
+      const maze: SquareType[] = new Array(nX * nX).fill("").map((_, index) => {
         const x = index % nX;
         const y = Math.floor(index / nX);
         const isWall = seedBuilder(["wall", x, y]).random() < 0.33;
+        const wallCracked = seedBuilder(["wall-cracked", x, y]).random() > 0.5;
+        const wallRotation =
+          Math.floor(seedBuilder(["wall-cracked", x, y]).random() * 4) * 90;
+        const isLavaSource = isWall
+          ? false
+          : seedBuilder(["lava", x, y]).random() > 0.99;
         return {
           x,
           y,
           isWall,
-        };
-      });
-
-      const mapWithLava = maze.map((square) => {
-        const isLavaSource = square?.isWall
-          ? false
-          : seedBuilder(["lava", square.x, square.y]).random() > 0.99;
-        return {
-          ...square,
-          hasLava: isLavaSource,
+          wallCracked,
+          wallRotation,
           isLavaSource,
+          hasLava: isLavaSource,
         };
       });
 
-      setSquares(mapWithLava);
+      setSquares(maze);
       const availableOptions = maze.filter((m) => !m.isWall);
 
       const player =
