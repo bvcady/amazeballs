@@ -174,6 +174,11 @@ export const useMovement = () => {
         });
       }
     };
+    if (nMovement === 1) {
+      const slideSound = new Audio("sounds/slide.wav");
+      slideSound.playbackRate = 1 - 0.1 + Math.random() * 0.2;
+      slideSound.play();
+    }
 
     handleStep();
   };
