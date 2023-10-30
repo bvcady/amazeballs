@@ -1,5 +1,5 @@
 import { theme } from "@/styles/Global";
-import { CellWrapper } from "../../styles/ASCIIStyled";
+import { CellWrapper } from "@/styles/shared/Shared.styles";
 
 interface AnimationProps {
   index: number;

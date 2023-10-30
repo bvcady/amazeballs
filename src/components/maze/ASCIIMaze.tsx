@@ -1,10 +1,11 @@
 import { SeedBuilder, SquareType } from "@/types/types";
-import { ASCIIWrapper, CellWrapper } from "./styles/ASCIIStyled";
-import { Wall } from "./components/Wall";
-import { Lava } from "./components/lava/Lava";
-import { Floor } from "./components/Floor";
+import { ASCIIWrapper } from "./ASCIIStyled";
+import { CellWrapper } from "@/styles/shared/Shared.styles";
+import { Wall } from "../wall/Wall";
+import { Lava } from "../lava/Lava";
+import { Floor } from "../floor/Floor";
 import { useMazeStore } from "@/store/MazeStore";
-import { Player } from "./components/player/Player";
+import { Player } from "../player/Player";
 import { useTumble } from "@/hooks/useTumble";
 
 interface Props {

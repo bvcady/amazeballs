@@ -16,6 +16,18 @@ export const useMovement = () => {
 
   const [keyHistory, setKeyHistory] = useState<string[]>([]);
 
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout> | null = null;
+    if (nMovement === 0) {
+      timeout = setTimeout(() => {
+        slide();
+      }, 2000);
+    }
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [nMovement]);
+
   const updateEnemies = () => {
     const lavaSquares = squares.filter((square) => square.hasLava);
 

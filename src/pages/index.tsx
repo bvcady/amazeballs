@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Head from "next/head";
 import { useInitializer } from "@/hooks/useInitializer";
-import { ASCIIMaze } from "@/components/maze/ascii/ASCIIMaze";
+import { ASCIIMaze } from "@/components/maze/ASCIIMaze";
 import { useMovement } from "@/hooks/useMovement";
 import { ViewPort } from "@/components/viewport/ViewPort";
 import { ArrowButton } from "@/components/controls/buttons/ArrowButton";
@@ -10,7 +10,7 @@ import { useMazeStore } from "@/store/MazeStore";
 import { Button } from "@mui/material";
 import { useEffect } from "react";
 import { useSeeding } from "@/hooks/useSeeding";
-import { UI } from "@/components/maze/ascii/ui/UI";
+import { UI } from "@/components/ui/UI";
 import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 
 export default function Home() {
@@ -18,25 +18,15 @@ export default function Home() {
 
   const { squares, nX, reload, seedBuilder } = useInitializer({ nX: 20 });
   const { saveFile } = useMazeStore((state) => state);
-  const { seed, nMovement, nHealth } = saveFile;
+  const { seed } = saveFile;
 
   useEffect(() => {
     reload();
   }, [seed]);
 
-  const { moveHandler, slide } = useMovement();
+  const { moveHandler } = useMovement();
 
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout> | null = null;
-    if (nMovement === 0) {
-      timeout = setTimeout(() => {
-        slide();
-      }, 2000);
-    }
-    return () => {
-      if (timeout) clearTimeout(timeout);
-    };
-  }, [nMovement]);
+  console.log("index gets rerendered");
 
   return (
     <>

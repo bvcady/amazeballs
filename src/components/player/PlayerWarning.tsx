@@ -1,15 +1,41 @@
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
 
 interface Props {
-  value?: number | string;
+  nMovement: number;
+  playerMessage?: string;
 }
 
-export const PlayerWarning = ({ value }: Props) => {
-  const message = typeof value === "number" ? (value > 0 ? value : "") : value;
+const messageOptions = ["aah", "uh oh", "oh nooo", "yikes", "woooo"];
+
+export const PlayerWarning = ({ nMovement, playerMessage }: Props) => {
+  const [message, setMessage] = useState("");
+
+  const getMessage = () => {
+    if (playerMessage) {
+      return playerMessage;
+    }
+    if (nMovement <= 3 && nMovement > 0) {
+      return nMovement.toString();
+    }
+    if (nMovement === 0) {
+      return messageOptions[
+        Math.floor(Math.random() * (messageOptions.length - 1))
+      ];
+    }
+    return "";
+  };
+
+  useEffect(() => {
+    setMessage(getMessage());
+  }, [nMovement, playerMessage]);
+
   return (
     <Wrapper>
-      <SpeachBubble>{message || "aah"}</SpeachBubble>
+      {message ? (
+        <SpeachBubble key={`player-message-${message}`}>{message}</SpeachBubble>
+      ) : null}
     </Wrapper>
   );
 };
@@ -41,24 +67,25 @@ const shakeKeyframes = keyframes`
 const SpeachBubble = styled("div")`
   font-size: 14px;
   width: fit-content;
-  margin: 0 auto;
-
   background-color: tomato;
   color: var(--darkColor);
-  border-radius: 2px;
+  border-radius: 1px;
   box-shadow: 1px 1px 0 0 var(--darkColor);
   display: grid;
   place-items: center;
   padding: 4px;
+  opacity: 1;
+  white-space: nowrap;
   animation: ${shakeKeyframes};
   animation-duration: 1s;
   animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
-  animation-fill-mode: forwards;
+
+  position: relative;
 
   :after {
     content: "";
     position: absolute;
-    background-color: var(--accentColor);
+    background-color: tomato;
     box-shadow: 1px 1px 0 0 var(--darkColor);
     bottom: -2px;
     width: 2px;
@@ -70,9 +97,9 @@ const Wrapper = styled("div")`
   position: absolute;
   inset: 0;
   transform: translateY(-75%);
-  overflow: hidden;
   padding: 6px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: center;
 `;

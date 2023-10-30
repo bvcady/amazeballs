@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { CellWrapper } from "../../styles/ASCIIStyled";
+import { CellWrapper } from "@/styles/shared/Shared.styles";
 import { keyframes } from "@emotion/react";
 
 const upAndDown = keyframes`

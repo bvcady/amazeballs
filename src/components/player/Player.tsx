@@ -220,12 +220,7 @@ export const Player = () => {
             <rect className="cls-3" x="17" y="8" width="1" height="1" />
           </g>
         </svg>
-        {nMovement <= 3 || playerMessage ? (
-          <PlayerWarning
-            key={`playerMovement-${nMovement}`}
-            value={playerMessage || nMovement}
-          />
-        ) : null}
+        <PlayerWarning {...{ nMovement, playerMessage }} />
       </PlayerWrapper>
       <ShadowWrapper>
         <svg viewBox="0 0 32 32">
