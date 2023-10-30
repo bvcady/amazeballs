@@ -20,10 +20,10 @@ export const ASCIIMaze = ({ squares, nX }: Props) => {
   const { player, saveFile } = useMazeStore((state) => state);
   const { nMovement } = saveFile;
 
-  const [play, { sound, pause, stop, duration }] = useSound(
+  const [play, { sound }] = useSound(
     "sounds/Ethan Alexander Harris - flashing lights in a park after dark.mp3",
     {
-      volume: 0.1,
+      volume: 0.2,
     }
   );
 

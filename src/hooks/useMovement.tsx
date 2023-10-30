@@ -4,6 +4,7 @@ import { useKeyPress } from "./useKeyPress";
 import { useEffect, useState } from "react";
 import { debounce } from "@mui/material";
 import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
+import useSound from "use-sound";
 
 export const useMovement = () => {
   const { squares, setSquares } = useMazeStore((state) => state);
@@ -15,6 +16,10 @@ export const useMovement = () => {
   const { nHealth } = saveFile;
 
   const [keyHistory, setKeyHistory] = useState<string[]>([]);
+
+  const [playHit] = useSound("sounds/hit.wav");
+  const [playLava] = useSound("sounds/lava-step.wav");
+  const [playSlide] = useSound("sounds/slide.wav");
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout> | null = null;
@@ -113,9 +118,9 @@ export const useMovement = () => {
 
     handleSlide();
     if (hadLava) {
-      new Audio("sounds/lava-step.wav").play();
+      playLava({ playbackRate: 0.9 + Math.random() * 0.2 });
     } else if (healthDeficit() > 0) {
-      new Audio("sounds/hit.wav").play();
+      playHit({ playbackRate: 0.9 + Math.random() * 0.2 });
     }
     setSaveFile({
       ...saveFile,
@@ -175,7 +180,7 @@ export const useMovement = () => {
         });
 
         if (exists.hasLava) {
-          new Audio("sounds/lava-step.wav").play();
+          playLava({ playbackRate: 0.9 + Math.random() * 0.2 });
         }
         return setPlayer({
           ...player,
@@ -185,9 +190,7 @@ export const useMovement = () => {
       }
     };
     if (nMovement === 1) {
-      const slideSound = new Audio("sounds/slide.wav");
-      slideSound.playbackRate = 1 - 0.1 + Math.random() * 0.2;
-      slideSound.play();
+      playSlide({ playbackRate: 0.9 + Math.random() * 0.2 });
     }
 
     handleStep();
