@@ -26,8 +26,6 @@ export default function Home() {
 
   const { moveHandler } = useMovement();
 
-  console.log("index gets rerendered");
-
   return (
     <>
       <Head>

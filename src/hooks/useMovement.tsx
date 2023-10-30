@@ -112,6 +112,11 @@ export const useMovement = () => {
     };
 
     handleSlide();
+    if (hadLava) {
+      new Audio("sounds/lava-step.wav").play();
+    } else if (healthDeficit() > 0) {
+      new Audio("sounds/hit.wav").play();
+    }
     setSaveFile({
       ...saveFile,
       nMovement: defaultPlayerInfo.nMovement,
@@ -168,6 +173,10 @@ export const useMovement = () => {
           nMovement: (saveFile.nMovement || 0) - 1,
           nHealth: exists.hasLava ? saveFile.nHealth - 1 : saveFile.nHealth,
         });
+
+        if (exists.hasLava) {
+          new Audio("sounds/lava-step.wav").play();
+        }
         return setPlayer({
           ...player,
           [direction]: player?.[direction] + increment,

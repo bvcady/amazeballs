@@ -7,6 +7,8 @@ import { Floor } from "../floor/Floor";
 import { useMazeStore } from "@/store/MazeStore";
 import { Player } from "../player/Player";
 import { useTumble } from "@/hooks/useTumble";
+import { use, useEffect, useRef } from "react";
+import { useSound } from "use-sound";
 
 interface Props {
   squares: SquareType[];
@@ -14,9 +16,22 @@ interface Props {
   seedBuilder: SeedBuilder;
 }
 
-export const ASCIIMaze = ({ squares, nX, seedBuilder }: Props) => {
+export const ASCIIMaze = ({ squares, nX }: Props) => {
   const { player, saveFile } = useMazeStore((state) => state);
   const { nMovement } = saveFile;
+
+  const [play, { sound, pause, stop, duration }] = useSound(
+    "sounds/Ethan Alexander Harris - flashing lights in a park after dark.mp3",
+    {
+      volume: 0.1,
+    }
+  );
+
+  useEffect(() => {
+    if (sound) {
+      play();
+    }
+  }, [sound]);
 
   const translation = [
     (player?.x || 0) * 32 + 32 + 16,
