@@ -67,7 +67,7 @@ const shakeKeyframes = keyframes`
 const SpeachBubble = styled("div")`
   font-size: 14px;
   width: fit-content;
-  background-color: tomato;
+  background-color: var(--accentColor);
   color: var(--darkColor);
   border-radius: 1px;
   box-shadow: 1px 1px 0 0 var(--darkColor);
@@ -85,7 +85,7 @@ const SpeachBubble = styled("div")`
   :after {
     content: "";
     position: absolute;
-    background-color: tomato;
+    background-color: var(--accentColor);
     box-shadow: 1px 1px 0 0 var(--darkColor);
     bottom: -2px;
     width: 2px;
