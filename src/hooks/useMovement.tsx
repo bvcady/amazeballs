@@ -86,7 +86,8 @@ export const useMovement = () => {
     const { direction = "x", increment = -1 } = slideDirection;
     let deltaMove = 0;
     let hadLava = false;
-    const healthDeficit = () => (hadLava ? 1 : 0) + (deltaMove <= -3 ? 1 : 0);
+    const healthDeficit = () =>
+      (hadLava ? 1 : 0) + (Math.abs(deltaMove) >= 3 ? 1 : 0);
 
     const handleSlide = () => {
       const exists = findExistingSquare(direction, deltaMove, increment);
