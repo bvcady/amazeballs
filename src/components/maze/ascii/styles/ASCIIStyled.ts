@@ -5,7 +5,6 @@ export const ASCIIWrapper = styled("div")<{
   nX?: number;
   translation?: [number, number];
   blur?: string;
-  boardTilt: string;
 }>`
   --nX: ${({ nX }) => nX || 10};
   --cellSize: 32px;
@@ -26,13 +25,11 @@ export const ASCIIWrapper = styled("div")<{
   --tY: -${({ translation }) => translation?.[1] || 0}px;
 
   transform: translateX(calc(var(--tX) + 150px))
-    translateY(calc(var(--tY) + 150px)) ${({ boardTilt }) => boardTilt};
+    translateY(calc(var(--tY) + 150px));
 
   filter: blur(${({ blur }) => blur || "0px"});
 
-  transition: transform
-      ${({ boardTilt }) => (boardTilt ? "1.5s ease-in" : "0.4s linear")},
-    filter 0.3s ease-out;
+  transition: transform 0.4s linear, filter 0.3s ease-out;
 
   user-select: none;
   pointer-events: none;
