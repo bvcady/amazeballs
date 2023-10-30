@@ -1,4 +1,4 @@
 export const defaultPlayerInfo = {
-  nMovement: 10,
+  nMovement: 7,
   nHealth: 4,
 };

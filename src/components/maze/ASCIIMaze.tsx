@@ -1,10 +1,12 @@
 import { SeedBuilder, SquareType } from "@/types/types";
-import { ASCIIWrapper, CellWrapper } from "./styles/ASCIIStyled";
-import { Wall } from "./components/Wall";
-import { Lava } from "./components/Lava";
-import { Floor } from "./components/Floor";
+import { ASCIIWrapper } from "./ASCIIStyled";
+import { CellWrapper } from "@/styles/shared/Shared.styles";
+import { Wall } from "../wall/Wall";
+import { Lava } from "../lava/Lava";
+import { Floor } from "../floor/Floor";
 import { useMazeStore } from "@/store/MazeStore";
-import { Player } from "./components/Player";
+import { Player } from "../player/Player";
+import { useTumble } from "@/hooks/useTumble";
 
 interface Props {
   squares: SquareType[];
@@ -13,39 +15,43 @@ interface Props {
 }
 
 export const ASCIIMaze = ({ squares, nX, seedBuilder }: Props) => {
-  const { player } = useMazeStore((state) => state);
+  const { player, saveFile } = useMazeStore((state) => state);
+  const { nMovement } = saveFile;
 
   const translation = [
     (player?.x || 0) * 32 + 32 + 16,
     (player?.y || 0) * 32 + 32 + 16,
   ] as [number, number];
 
+  const { tumble } = useTumble();
+
   return (
-    <ASCIIWrapper {...{ nX, translation }}>
-      {squares?.map((s) => {
-        return (
+    <div
+      style={{
+        transform:
+          nMovement === 0
+            ? `rotate3D(${tumble[0]}, ${tumble[1]}, ${tumble[2]}, 0.5deg)`
+            : "",
+      }}
+    >
+      <ASCIIWrapper {...{ nX, translation }}>
+        {squares?.map((s) => (
           <CellWrapper key={s.x + "-" + s.y}>
-            {player?.x === s.x && player.y === s.y ? (
-              <Player key={"player" + s.x + "-" + s.y} />
-            ) : null}
             {s.isWall ? (
-              <Wall
-                cracked={seedBuilder(["wall-cracked", s.x, s.y]).random() > 0.5}
-                rotation={
-                  Math.floor(
-                    seedBuilder(["wall-cracked", s.x, s.y]).random() * 4
-                  ) * 90
-                }
-              />
+              <Wall cracked={s.wallCracked!} rotation={s.wallRotation!} />
             ) : null}
             {s.hasLava ? (
-              <Lava neighbours={findNeighbours(s, "hasLava", squares)} />
+              <Lava
+                neighbours={findNeighbours(s, "hasLava", squares)}
+                isLavaSource={s.isLavaSource}
+              />
             ) : null}
             {!(s.hasLava || s.isWall) ? <Floor /> : null}
           </CellWrapper>
-        );
-      })}
-    </ASCIIWrapper>
+        ))}
+        <Player />
+      </ASCIIWrapper>
+    </div>
   );
 };
 

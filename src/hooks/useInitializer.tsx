@@ -2,6 +2,7 @@
 import { useMazeStore } from "@/store/MazeStore";
 import { useEffect, useState } from "react";
 import * as seedInitilizer from "random-seed";
+import { SquareType } from "@/types/types";
 
 interface Props {
   nX: number;
@@ -11,7 +12,7 @@ export const useInitializer = ({ nX }: Props) => {
 
   const { setSquares, squares } = useMazeStore((state) => state);
   const { setPlayer } = useMazeStore((state) => state);
-  const { saveFile } = useMazeStore((state) => state);
+  const { saveFile, setSaveFile } = useMazeStore((state) => state);
 
   const { seed } = saveFile;
 
@@ -23,40 +24,42 @@ export const useInitializer = ({ nX }: Props) => {
     return s.create(seedString);
   };
 
+  const withinRange = (input: number, from: number, to: number) => {
+    if (input >= from && input <= to) {
+      return input;
+    }
+    if (input < from) {
+      return from;
+    }
+    return to;
+  };
+
   const reload = () => {
     if (seed) {
-      const withinRange = (input: number, from: number, to: number) => {
-        if (input >= from && input <= to) {
-          return input;
-        }
-        if (input < from) {
-          return from;
-        }
-        return to;
-      };
       setSquareSize(withinRange((window.innerWidth * 0.66) / nX, 4, 32));
 
-      const maze = new Array(nX * nX).fill("").map((_, index) => {
+      const maze: SquareType[] = new Array(nX * nX).fill("").map((_, index) => {
         const x = index % nX;
         const y = Math.floor(index / nX);
         const isWall = seedBuilder(["wall", x, y]).random() < 0.33;
+        const wallCracked = seedBuilder(["wall-cracked", x, y]).random() > 0.5;
+        const wallRotation =
+          Math.floor(seedBuilder(["wall-cracked", x, y]).random() * 4) * 90;
+        const isLavaSource = isWall
+          ? false
+          : seedBuilder(["lava", x, y]).random() > 0.99;
         return {
           x,
           y,
           isWall,
+          wallCracked,
+          wallRotation,
+          isLavaSource,
+          hasLava: isLavaSource,
         };
       });
 
-      const mapWithLava = maze.map((square) => {
-        return {
-          ...square,
-          hasLava: square?.isWall
-            ? false
-            : seedBuilder(["lava", square.x, square.y]).random() > 0.99,
-        };
-      });
-
-      setSquares(mapWithLava);
+      setSquares(maze);
       const availableOptions = maze.filter((m) => !m.isWall);
 
       const player =
@@ -67,6 +70,24 @@ export const useInitializer = ({ nX }: Props) => {
         ];
 
       setPlayer(player);
+      setSaveFile({
+        ...saveFile,
+        slideDirection: {
+          direction:
+            seedBuilder([
+              `slide-direction-${saveFile.nSlides}-${saveFile.layer}`,
+            ]).random() > 0.5
+              ? "x"
+              : "y",
+          increment:
+            seedBuilder([
+              `slide-increment-${saveFile.nSlides}-${saveFile.layer}`,
+            ]).random() > 0.5
+              ? -1
+              : 1,
+        },
+        nSlides: 0,
+      });
     }
   };
 

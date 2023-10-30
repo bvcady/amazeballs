@@ -12,8 +12,21 @@ export const useMovement = () => {
 
   const { nMovement = 0 } = saveFile;
   const { slideDirection } = saveFile;
+  const { nHealth } = saveFile;
 
   const [keyHistory, setKeyHistory] = useState<string[]>([]);
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout> | null = null;
+    if (nMovement === 0) {
+      timeout = setTimeout(() => {
+        slide();
+      }, 2000);
+    }
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [nMovement]);
 
   const updateEnemies = () => {
     const lavaSquares = squares.filter((square) => square.hasLava);
@@ -29,6 +42,7 @@ export const useMovement = () => {
                   ((square.y === ls.y - 1 || square.y === ls.y + 1) &&
                     square.x === ls.x)) &&
                 !square.isWall &&
+                !square.isLavaSource &&
                 !square.hasLava
             );
             return lavaOptions.slice(
@@ -69,13 +83,15 @@ export const useMovement = () => {
   };
 
   const slide = () => {
-    const { direction, increment } = slideDirection;
+    const { direction = "x", increment = -1 } = slideDirection;
     let deltaMove = 0;
     let hadLava = false;
+    const healthDeficit = () =>
+      (hadLava ? 1 : 0) + (Math.abs(deltaMove) >= 3 ? 1 : 0);
 
     const handleSlide = () => {
       const exists = findExistingSquare(direction, deltaMove, increment);
-      if (!exists || exists.isWall) {
+      if (!exists || exists.isWall || exists.isLavaSource) {
         if (!player || deltaMove === 0) {
           return;
         }
@@ -83,6 +99,7 @@ export const useMovement = () => {
         return setPlayer({
           ...player,
           [direction]: player?.[direction] + deltaMove,
+          message: healthDeficit() >= 1 ? "ouch" : undefined,
         });
       }
 
@@ -98,16 +115,20 @@ export const useMovement = () => {
     setSaveFile({
       ...saveFile,
       nMovement: defaultPlayerInfo.nMovement,
-      nHealth: hadLava ? saveFile.nHealth - 1 : saveFile.nHealth,
+      nHealth: saveFile.nHealth - healthDeficit(),
       slideDirection: {
         direction: Math.random() > 0.5 ? "x" : "y",
         increment: Math.random() > 0.5 ? 1 : -1,
       },
+      nSlides: saveFile.nSlides + 1,
     });
     updateEnemies();
   };
 
   const moveHandler = (key: string | undefined) => {
+    if (nHealth <= 0) {
+      return;
+    }
     if (!key) {
       return;
     }
@@ -141,7 +162,7 @@ export const useMovement = () => {
 
     const handleStep = () => {
       const exists = findExistingSquare(direction, 0, increment);
-      if (exists && !exists?.isWall && player) {
+      if (exists && !exists.isWall && !exists.isLavaSource && player) {
         setSaveFile({
           ...saveFile,
           nMovement: (saveFile.nMovement || 0) - 1,
@@ -150,9 +171,15 @@ export const useMovement = () => {
         return setPlayer({
           ...player,
           [direction]: player?.[direction] + increment,
+          message: exists.hasLava ? "ouch" : undefined,
         });
       }
     };
+    if (nMovement === 1) {
+      const slideSound = new Audio("sounds/slide.wav");
+      slideSound.playbackRate = 1 - 0.1 + Math.random() * 0.2;
+      slideSound.play();
+    }
 
     handleStep();
   };

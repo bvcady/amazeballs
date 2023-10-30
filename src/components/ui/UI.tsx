@@ -4,10 +4,11 @@ import styled from "@emotion/styled";
 import { SlideDirectionIndicator } from "./SlideDirectionIndicator";
 import { ButtonBase } from "@mui/material";
 import { useSeeding } from "@/hooks/useSeeding";
+import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 
 export const UI = () => {
-  const totalEnergy = 10;
-  const totalHealth = 4;
+  const totalEnergy = defaultPlayerInfo.nMovement;
+  const totalHealth = defaultPlayerInfo.nHealth;
   const { saveFile } = useMazeStore((state) => state);
   const { nMovement, nHealth } = saveFile;
 
