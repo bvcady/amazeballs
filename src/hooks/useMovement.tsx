@@ -30,6 +30,7 @@ export const useMovement = () => {
                   ((square.y === ls.y - 1 || square.y === ls.y + 1) &&
                     square.x === ls.x)) &&
                 !square.isWall &&
+                !square.isLavaSource &&
                 !square.hasLava
             );
             return lavaOptions.slice(
@@ -77,7 +78,7 @@ export const useMovement = () => {
 
     const handleSlide = () => {
       const exists = findExistingSquare(direction, deltaMove, increment);
-      if (!exists || exists.isWall) {
+      if (!exists || exists.isWall || exists.isLavaSource) {
         if (!player || deltaMove === 0) {
           return;
         }
@@ -148,7 +149,7 @@ export const useMovement = () => {
 
     const handleStep = () => {
       const exists = findExistingSquare(direction, 0, increment);
-      if (exists && !exists?.isWall && player) {
+      if (exists && !exists.isWall && !exists.isLavaSource && player) {
         setSaveFile({
           ...saveFile,
           nMovement: (saveFile.nMovement || 0) - 1,

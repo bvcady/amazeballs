@@ -5,6 +5,7 @@ export const ASCIIWrapper = styled("div")<{
   nX?: number;
   translation?: [number, number];
   blur?: string;
+  boardTilt: string;
 }>`
   --nX: ${({ nX }) => nX || 10};
   --cellSize: 32px;
@@ -19,16 +20,19 @@ export const ASCIIWrapper = styled("div")<{
     inset 0 0 4px 8px var(--darkColor);
 
   width: fit-content;
+  perspective: 30px;
 
   --tX: -${({ translation }) => translation?.[0] || 0}px;
   --tY: -${({ translation }) => translation?.[1] || 0}px;
 
   transform: translateX(calc(var(--tX) + 150px))
-    translateY(calc(var(--tY) + 150px));
+    translateY(calc(var(--tY) + 150px)) ${({ boardTilt }) => boardTilt};
 
   filter: blur(${({ blur }) => blur || "0px"});
 
-  transition: transform 0.4s linear, filter 0.3s ease-out;
+  transition: transform
+      ${({ boardTilt }) => (boardTilt ? "1.5s ease-in" : "0.4s linear")},
+    filter 0.3s ease-out;
 
   user-select: none;
   pointer-events: none;
@@ -56,5 +60,17 @@ export const CellWrapper = styled("code")<{
 
   #lava * {
     fill: var(--darkColor);
+  }
+  #dark * {
+    fill: var(--darkColor);
+  }
+  #medium * {
+    fill: var(--mediumColor);
+  }
+  #light * {
+    fill: var(--lightColor);
+  }
+  #accent * {
+    fill: var(--accentColor);
   }
 `;

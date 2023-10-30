@@ -4,6 +4,7 @@ export type SquareType = {
   x: number;
   y: number;
   isWall?: boolean;
+  isLavaSource?: boolean;
   hasLava?: boolean;
 };
 

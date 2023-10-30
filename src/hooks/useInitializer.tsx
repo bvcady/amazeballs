@@ -49,11 +49,13 @@ export const useInitializer = ({ nX }: Props) => {
       });
 
       const mapWithLava = maze.map((square) => {
+        const isLavaSource = square?.isWall
+          ? false
+          : seedBuilder(["lava", square.x, square.y]).random() > 0.99;
         return {
           ...square,
-          hasLava: square?.isWall
-            ? false
-            : seedBuilder(["lava", square.x, square.y]).random() > 0.99,
+          hasLava: isLavaSource,
+          isLavaSource,
         };
       });
 
