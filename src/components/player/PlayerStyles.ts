@@ -21,9 +21,7 @@ const upAndDown = keyframes`
 
 `;
 
-export const PlayerWrapper = styled(CellWrapper)<{
-  position: number[];
-}>`
+export const PlayerWrapper = styled(CellWrapper)`
   width: 32px;
   height: 32px;
   position: absolute;
@@ -33,13 +31,6 @@ export const PlayerWrapper = styled(CellWrapper)<{
   font-size: 1.5rem;
   box-shadow: 1px solid black;
   margin-top: -8px;
-
-  ${({ position }) => css`
-    transform: translateX(${position[0] * 32 + 32}px)
-      translateY(${position[1] * 32 + 32}px);
-  `}
-
-  transition: transform 0.3s ease-out;
 
   #player-sprite {
     animation: ${upAndDown} 1s linear;

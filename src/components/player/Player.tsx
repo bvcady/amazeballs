@@ -2,12 +2,37 @@
 import { useMazeStore } from "@/store/MazeStore";
 import { PlayerWrapper, ShadowWrapper } from "./PlayerStyles";
 import { PlayerWarning } from "./PlayerWarning";
+import { gsap } from "gsap";
+import { useEffect, useRef, useState } from "react";
 
 export const Player = () => {
   const { saveFile, player } = useMazeStore((state) => state);
   const { nMovement, slideDirection } = saveFile;
+  const [previousPlayer, setPreviousPlayer] = useState({
+    x: 0,
+    y: 0,
+  });
   const playerMessage = player?.message;
-  const position = [player?.x || 0, player?.y || 0];
+  const playerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (player && playerRef.current) {
+      gsap.fromTo(
+        playerRef.current,
+        {
+          transform: `translateX(${previousPlayer.x * 32 + 32}px)
+      translateY(${previousPlayer.y * 32 + 32}px)`,
+        },
+        {
+          transform: `translateX(${player.x * 32 + 32}px)
+      translateY(${player.y * 32 + 32}px)`,
+          duration: 0.66,
+          ease: "steps(2)",
+        }
+      );
+      setPreviousPlayer({ x: player.x, y: player.y });
+    }
+  }, [player]);
 
   const left =
     slideDirection.direction === "x" && slideDirection.increment === -1;
@@ -20,7 +45,7 @@ export const Player = () => {
 
   return (
     <>
-      <PlayerWrapper id={"Player"} {...{ position }}>
+      <PlayerWrapper ref={playerRef} id={"Player"}>
         {nMovement > 0 && <PlayerIdle />}
         {nMovement === 0 && left && <PlayerHorizontalSlide flip />}
         {nMovement === 0 && right && <PlayerHorizontalSlide />}

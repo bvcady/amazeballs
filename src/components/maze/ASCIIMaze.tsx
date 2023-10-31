@@ -20,18 +20,18 @@ export const ASCIIMaze = ({ squares, nX }: Props) => {
   const { player, saveFile } = useMazeStore((state) => state);
   const { nMovement } = saveFile;
 
-  const [play, { sound }] = useSound(
-    "sounds/Ethan Alexander Harris - flashing lights in a park after dark.mp3",
-    {
-      volume: 0.2,
-    }
-  );
+  // const [play, { sound }] = useSound(
+  //   "sounds/Ethan Alexander Harris - flashing lights in a park after dark.mp3",
+  //   {
+  //     volume: 0.2,
+  //   }
+  // );
 
-  useEffect(() => {
-    if (sound) {
-      play();
-    }
-  }, [sound]);
+  // useEffect(() => {
+  //   if (sound) {
+  //     play();
+  //   }
+  // }, [sound]);
 
   const translation = [
     (player?.x || 0) * 32 + 32 + 16,
