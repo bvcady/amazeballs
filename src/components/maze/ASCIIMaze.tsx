@@ -7,8 +7,9 @@ import { Floor } from "../floor/Floor";
 import { useMazeStore } from "@/store/MazeStore";
 import { Player } from "../player/Player";
 import { useTumble } from "@/hooks/useTumble";
-import { use, useEffect, useRef } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { useSound } from "use-sound";
+import { gsap } from "gsap";
 
 interface Props {
   squares: SquareType[];
@@ -19,24 +20,54 @@ interface Props {
 export const ASCIIMaze = ({ squares, nX }: Props) => {
   const { player, saveFile } = useMazeStore((state) => state);
   const { nMovement } = saveFile;
+  const [previousTranslation, setPreviousTranslation] = useState({
+    x: 0,
+    y: 0,
+  });
 
-  // const [play, { sound }] = useSound(
-  //   "sounds/Ethan Alexander Harris - flashing lights in a park after dark.mp3",
-  //   {
-  //     volume: 0.2,
-  //   }
-  // );
+  const [play, { sound }] = useSound(
+    "sounds/Ethan Alexander Harris - flashing lights in a park after dark.mp3",
+    {
+      volume: 0.2,
+    }
+  );
 
-  // useEffect(() => {
-  //   if (sound) {
-  //     play();
-  //   }
-  // }, [sound]);
+  useEffect(() => {
+    if (sound) {
+      // play();
+    }
+  }, [sound]);
 
-  const translation = [
-    (player?.x || 0) * 32 + 32 + 16,
-    (player?.y || 0) * 32 + 32 + 16,
-  ] as [number, number];
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const cellSize = 32;
+
+    const translation = player
+      ? {
+          x: -player?.x * cellSize + 3.125 * cellSize,
+          y: -player?.y * cellSize + 3.125 * cellSize,
+        }
+      : { x: 0, y: 0 };
+
+    if (player && mapRef.current) {
+      gsap.fromTo(
+        mapRef.current,
+        {
+          transform: `translateX(${previousTranslation.x}px) translateY(${previousTranslation.y}px)`,
+        },
+        {
+          transform: `translateX(${translation.x}px) translateY(${translation.y}px)`,
+          duration: 0.66,
+          ease: "steps(12)",
+        }
+      );
+      setPreviousTranslation({
+        x: translation.x,
+        y: translation.y,
+      });
+    }
+  }, [player]);
 
   const { tumble } = useTumble();
 
@@ -49,7 +80,7 @@ export const ASCIIMaze = ({ squares, nX }: Props) => {
             : "",
       }}
     >
-      <ASCIIWrapper {...{ nX, translation }}>
+      <ASCIIWrapper ref={mapRef} {...{ nX }}>
         {squares?.map((s) => (
           <CellWrapper key={s.x + "-" + s.y}>
             {s.isWall ? (
