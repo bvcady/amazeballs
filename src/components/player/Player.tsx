@@ -15,6 +15,9 @@ export const Player = () => {
   const playerMessage = player?.message;
   const playerRef = useRef<HTMLDivElement>(null);
 
+  // Intend to make animated sprite for idle, walking and sliding in each direction.
+  // Animate with GSAP
+
   useEffect(() => {
     if (player && playerRef.current) {
       gsap.fromTo(
