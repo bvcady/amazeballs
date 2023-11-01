@@ -59,7 +59,7 @@ export const ASCIIMaze = ({ squares, nX }: Props) => {
         {
           transform: `translateX(${translation.x}px) translateY(${translation.y}px)`,
           duration: 0.66,
-          ease: "steps(12)",
+          ease: "ease-in",
         }
       );
       setPreviousTranslation({
