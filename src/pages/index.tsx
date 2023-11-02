@@ -47,9 +47,9 @@ export default function Home() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          padding: "3rem 0",
+          padding: "2rem 0",
           overflow: "hidden",
-          maxWidth: "400px",
+          // maxWidth: "400px",
           margin: "0 auto",
         }}
       >
@@ -82,7 +82,9 @@ export default function Home() {
               rotation="180deg"
             />
           </DirectionalPad>
-          <span style={{ opacity: 0.2 }}>{seed}</span>
+          <span style={{ opacity: seed ? 0.2 : 0 }}>
+            {seed || "placeholder"}
+          </span>
         </Console>
 
         <Button onClick={() => setNewSeed()}>Reload</Button>
