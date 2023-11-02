@@ -14,6 +14,7 @@ import { UI } from "@/components/ui/UI";
 import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 import { Console } from "@/components/console/Console";
 import { ScreenPadding } from "@/components/console/Console.styles";
+import { Grate } from "@/components/console/Grate";
 
 export default function Home() {
   const { setNewSeed } = useSeeding();
@@ -60,6 +61,7 @@ export default function Home() {
               <ASCIIMaze {...{ squares, nX, seedBuilder }} />
             </ViewPort>
           </ScreenPadding>
+          <Grate />
           <DirectionalPad>
             <ArrowButton
               position="left"
