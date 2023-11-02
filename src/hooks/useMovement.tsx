@@ -197,7 +197,9 @@ export const useMovement = () => {
   };
 
   useKeyPress({
-    callback: debounce(moveHandler, 50),
+    callback: () => {
+      debounce(moveHandler, 50);
+    },
   });
 
   return {

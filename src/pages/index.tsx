@@ -12,6 +12,8 @@ import { useEffect } from "react";
 import { useSeeding } from "@/hooks/useSeeding";
 import { UI } from "@/components/ui/UI";
 import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
+import { Console } from "@/components/console/Console";
+import { ScreenPadding } from "@/components/console/Console.styles";
 
 export default function Home() {
   const { setNewSeed } = useSeeding();
@@ -51,33 +53,38 @@ export default function Home() {
           margin: "0 auto",
         }}
       >
-        <ViewPort>
-          <UI />
-          <ASCIIMaze {...{ squares, nX, seedBuilder }} />
-        </ViewPort>
-        <DirectionalPad>
-          <ArrowButton
-            position="left"
-            callback={() => moveHandler("ArrowLeft")}
-            rotation="270deg"
-          />
-          <ArrowButton
-            position="up"
-            callback={() => moveHandler("ArrowUp")}
-            rotation="0deg"
-          />
-          <ArrowButton
-            position="right"
-            callback={() => moveHandler("ArrowRight")}
-            rotation="90deg"
-          />
-          <ArrowButton
-            position="down"
-            callback={() => moveHandler("ArrowDown")}
-            rotation="180deg"
-          />
-        </DirectionalPad>
-        <span>{seed}</span>
+        <Console>
+          <ScreenPadding>
+            <ViewPort>
+              <UI />
+              <ASCIIMaze {...{ squares, nX, seedBuilder }} />
+            </ViewPort>
+          </ScreenPadding>
+          <DirectionalPad>
+            <ArrowButton
+              position="left"
+              callback={() => moveHandler("ArrowLeft")}
+              rotation="270deg"
+            />
+            <ArrowButton
+              position="up"
+              callback={() => moveHandler("ArrowUp")}
+              rotation="0deg"
+            />
+            <ArrowButton
+              position="right"
+              callback={() => moveHandler("ArrowRight")}
+              rotation="90deg"
+            />
+            <ArrowButton
+              position="down"
+              callback={() => moveHandler("ArrowDown")}
+              rotation="180deg"
+            />
+          </DirectionalPad>
+          <span style={{ opacity: 0.2 }}>{seed}</span>
+        </Console>
+
         <Button onClick={() => setNewSeed()}>Reload</Button>
       </section>
     </>

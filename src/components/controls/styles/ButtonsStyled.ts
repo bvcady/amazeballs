@@ -5,8 +5,8 @@ export const ArrowButtonWrapper = styled(ButtonBase)<{
   rotation: string;
   position: "up" | "left" | "right" | "down";
 }>`
-  height: 2rem;
-  width: 2rem;
+  height: 40px;
+  width: 40px;
   display: grid;
   place-items: center;
   border-radius: 0.25rem;
@@ -42,6 +42,7 @@ export const ArrowButtonWrapper = styled(ButtonBase)<{
 
 export const DirectionalPadWrapper = styled("div")`
   align-self: flex-start;
+  width: fit-content;
 
   display: grid;
   grid-template-areas:
@@ -52,7 +53,8 @@ export const DirectionalPadWrapper = styled("div")`
   grid-template-rows: repeat(3, 1fr);
   place-items: center;
   position: relative;
-  margin: 2rem;
+  margin: 24px 0rem;
+
   overflow: visible !important;
   * {
     border-radius: 0.25rem;
