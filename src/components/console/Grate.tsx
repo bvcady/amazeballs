@@ -123,7 +123,7 @@ export const Grate = () => {
         viewBox="0 0 69 14"
         width={69}
         height={14}
-        style={{ transform: "scale(1, -1)" }}
+        style={{ transform: "scale(-1, 1)" }}
         fill={theme.colors.medium}
       >
         <g>

@@ -12,7 +12,7 @@ export const ASCIIWrapper = styled("div")<{
   grid-template-columns: repeat(var(--nX), var(--cellSize));
   grid-template-rows: repeat(var(--nX), var(--cellSize));
 
-  background-color: var(--lightColor);
+  background-color: var(--mediumColor);
   padding: var(--cellSize);
   box-shadow: inset 0 0 12px 24px var(--darkColor),
     inset 0 0 4px 8px var(--darkColor);

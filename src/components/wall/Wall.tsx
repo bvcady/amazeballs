@@ -2,6 +2,7 @@ import { theme } from "@/styles/Global";
 import { CellWrapper } from "@/styles/shared/Shared.styles";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { WallBase } from "./WallBase";
 
 interface Props {
   cracked: boolean;
@@ -21,15 +22,8 @@ const WallWrapper = styled("div")<{ x: number; y: number }>`
   z-index: ${({ y }) => y};
   display: flex;
   justify-content: flex-start;
-  background-color: var(--bgColor);
   flex-direction: column;
   border-radius: 0.25rem;
-
-  svg {
-    align-self: flex-start;
-    width: 32px;
-    height: 32px;
-  }
 
   .background {
     fill: var(--bgColor);
@@ -54,15 +48,17 @@ export const Wall = ({ cracked = false, rotation, x, y }: Props) => {
       {cracked ? (
         <svg
           viewBox="0 0 32 32"
+          width={32}
+          height={32}
           style={{ transform: `rotate(${rotation}deg)` }}
         >
-          <g id="Layer_8">
+          <g>
             <polygon
-              className="medium"
+              className="light"
               points="25 31 25 30 25 29 24 29 23 29 23 28 23 27 21 27 19 27 17 27 15 27 15 26 14 26 14 25 13 25 13 24 13 23 13 22 13 21 13 20 12 20 12 19 11 19 11 18 10 18 10 17 10 16 10 15 9 15 8 15 7 15 6 15 6 14 4 14 2 14 2 13 1 13 1 29 2 29 2 30 3 30 3 31 25 31"
             />
             <polygon
-              className="medium"
+              className="light"
               points="30 3 30 2 29 2 29 1 3 1 3 2 2 2 2 3 1 3 1 11 3 11 3 12 4 12 6 12 8 12 8 13 9 13 10 13 11 13 12 13 12 14 12 15 12 16 12 17 13 17 13 18 14 18 14 19 15 19 15 20 15 21 15 22 15 23 15 24 16 24 16 25 17 25 19 25 21 25 23 25 25 25 25 26 25 27 26 27 27 27 27 28 27 29 27 30 27 31 29 31 29 30 30 30 30 29 31 29 31 3 30 3"
             />
             <polygon
@@ -138,20 +134,20 @@ export const Wall = ({ cracked = false, rotation, x, y }: Props) => {
           </g>
         </svg>
       ) : null}
+
       {!cracked ? (
-        <svg viewBox="0 0 32 32">
-          <g id="final">
-            <polygon
-              className="medium"
-              points="29 28 30 28 30 4 29 4 29 3 28 3 28 2 4 2 4 3 3 3 3 4 2 4 2 28 3 28 3 29 4 29 4 30 28 30 28 29 29 29 29 28"
-            />
-            <path
-              className="dark"
-              d="m28,2v1h1v1h1v24h-1v1h-1v1H4v-1h-1v-1h-1V4h1v-1h1v-1h24m1-1H3v1h-1v1H1v26h1v1h1v1h26v-1h1v-1h1V3h-1v-1h-1v-1h0Z"
-            />
-          </g>
+        <svg viewBox="0 0 32 32" width={32} height={32}>
+          <polygon
+            className="light"
+            points="29 28 30 28 30 4 29 4 29 3 28 3 28 2 4 2 4 3 3 3 3 4 2 4 2 28 3 28 3 29 4 29 4 30 28 30 28 29 29 29 29 28"
+          />
+          <path
+            className="dark"
+            d="m28,2v1h1v1h1v24h-1v1h-1v1H4v-1h-1v-1h-1V4h1v-1h1v-1h24m1-1H3v1h-1v1H1v26h1v1h1v1h26v-1h1v-1h1V3h-1v-1h-1v-1h0Z"
+          />
         </svg>
       ) : null}
+      <WallBase />
     </WallWrapper>
   );
 };
