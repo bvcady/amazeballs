@@ -48,7 +48,11 @@ export const Player = () => {
 
   return (
     <>
-      <PlayerWrapper ref={playerRef} id={"Player"}>
+      <PlayerWrapper
+        {...{ x: player?.x, y: player?.y }}
+        ref={playerRef}
+        id={"Player"}
+      >
         {nMovement > 0 && <PlayerIdle />}
         {nMovement === 0 && left && <PlayerHorizontalSlide flip />}
         {nMovement === 0 && right && <PlayerHorizontalSlide />}

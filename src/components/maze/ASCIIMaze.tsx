@@ -7,7 +7,7 @@ import { Floor } from "../floor/Floor";
 import { useMazeStore } from "@/store/MazeStore";
 import { Player } from "../player/Player";
 import { useTumble } from "@/hooks/useTumble";
-import { use, useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { useSound } from "use-sound";
 import { gsap } from "gsap";
 
@@ -82,18 +82,23 @@ export const ASCIIMaze = ({ squares, nX }: Props) => {
     >
       <ASCIIWrapper ref={mapRef} {...{ nX }}>
         {squares?.map((s) => (
-          <CellWrapper key={s.x + "-" + s.y}>
+          <React.Fragment key={s.x + "-" + s.y}>
             {s.isWall ? (
-              <Wall cracked={s.wallCracked!} rotation={s.wallRotation!} />
-            ) : null}
-            {s.hasLava ? (
-              <Lava
-                neighbours={findNeighbours(s, "hasLava", squares)}
-                isLavaSource={s.isLavaSource}
+              <Wall
+                {...{ x: s.x, y: s.y }}
+                cracked={s.wallCracked!}
+                rotation={s.wallRotation!}
               />
             ) : null}
-            {!(s.hasLava || s.isWall) ? <Floor /> : null}
-          </CellWrapper>
+            <CellWrapper>
+              {s.hasLava ? (
+                <Lava
+                  neighbours={findNeighbours(s, "hasLava", squares)}
+                  isLavaSource={s.isLavaSource}
+                />
+              ) : null}
+            </CellWrapper>
+          </React.Fragment>
         ))}
         <Player />
       </ASCIIWrapper>

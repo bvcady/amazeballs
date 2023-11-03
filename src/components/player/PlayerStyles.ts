@@ -21,13 +21,13 @@ const upAndDown = keyframes`
 
 `;
 
-export const PlayerWrapper = styled(CellWrapper)`
+export const PlayerWrapper = styled(CellWrapper)<{ x?: number; y?: number }>`
   width: 32px;
   height: 32px;
   position: absolute;
   top: 4px;
   left: 0;
-  z-index: 2;
+  z-index: ${({ y }) => y || 0};
   font-size: 1.5rem;
   box-shadow: 1px solid black;
   margin-top: -8px;
