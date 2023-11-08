@@ -3,10 +3,7 @@ import styled from "@emotion/styled";
 
 export const WallWrapper = styled("div")<{ x: number; y: number }>`
   position: absolute;
-  ${({ x, y }) => css`
-    top: calc(32px + ${y * 32}px - 12px);
-    left: calc(32px + ${x * 32}px);
-  `}
+
   width: 32px;
   height: 44px;
   z-index: ${({ y }) => y};

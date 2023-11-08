@@ -20,22 +20,34 @@ export const Player = () => {
 
   useEffect(() => {
     if (player && playerRef.current) {
+      let d = { x: 0, y: 0 };
+      if (nMovement === 0) {
+        if (slideDirection.direction === "y") {
+          d.x = Math.abs(10 - player.x);
+          d.y = 0;
+        }
+        if (slideDirection.direction === "x") {
+          d.y = Math.abs(10 - player.y);
+          d.x = 0;
+        }
+      }
+      console.log(d);
       gsap.fromTo(
         playerRef.current,
         {
-          transform: `translateX(${previousPlayer.x * 32 + 32}px)
-      translateY(${previousPlayer.y * 32 + 32}px)`,
+          top: previousPlayer.y * 32 + 32 + d.y,
+          left: previousPlayer.x * 32 + 32 + d.x,
         },
         {
-          transform: `translateX(${player.x * 32 + 32}px)
-      translateY(${player.y * 32 + 32}px)`,
+          top: player.y * 32 + 32 + d.y,
+          left: player.x * 32 + 32 + d.x,
           duration: 0.66,
           ease: "steps(2)",
         }
       );
       setPreviousPlayer({ x: player.x, y: player.y });
     }
-  }, [player]);
+  }, [player, nMovement]);
 
   const left =
     slideDirection.direction === "x" && slideDirection.increment === -1;
