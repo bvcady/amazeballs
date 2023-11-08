@@ -17,6 +17,8 @@ import { Grate } from "@/components/console/Grate";
 import { SSButton } from "@/components/console/controls/buttons/SSButton";
 import { ButtonArea } from "@/components/console/ButtonArea";
 import { useUIStore } from "@/store/UIStore";
+import { LetterButton } from "@/components/console/controls/buttons/LetterButton";
+import { theme } from "@/styles/Global";
 
 export default function Home() {
   const { setNewSeed } = useSeeding();
@@ -95,12 +97,27 @@ export default function Home() {
                 display: "flex",
                 flexDirection: "column",
                 gap: "0.5rem",
+                transform: "translateX(24px)",
               }}
             >
               <SSButton callback={() => inputHandler("Space")} />
               <SSButton callback={() => null} />
             </div>
-            <div></div>
+            <div
+              style={{
+                width: "100%",
+                alignItems: "flex-end",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <LetterButton
+                color={theme.colors.accent}
+                letter="A"
+                callback={() => null}
+              />
+              <LetterButton letter="B" callback={() => null} />
+            </div>
           </ButtonArea>
           <span style={{ opacity: seed ? 0.2 : 0 }}>
             {seed || "placeholder"}

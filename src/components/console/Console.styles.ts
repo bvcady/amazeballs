@@ -19,8 +19,8 @@ export const ScreenPadding = styled("div")`
 `;
 
 export const ButtonAreaWrapper = styled("div")`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(3, 1fr);
 `;
