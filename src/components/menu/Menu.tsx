@@ -31,9 +31,7 @@ interface IMenuOption {
 const MenuOption = ({ option, disabled, current }: IMenuOption) => {
   return (
     <ItemWrapper>
-      <span>
-        {current && `➔`} {option.label}
-      </span>
+      <span>{`${current ? `➔` : ""} ${option.label}`.slice(0, 15)}</span>
     </ItemWrapper>
   );
 };

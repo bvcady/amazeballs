@@ -35,14 +35,9 @@ export const UI = () => {
       {menuOpen && (
         <Menu
           options={[
-            { label: "example", callback: () => {} },
-            { label: "example1", callback: () => {} },
-            { label: "example2", callback: () => {} },
-            { label: "example3", callback: () => {} },
-            { label: "example4", callback: () => {} },
-            { label: "example5", callback: () => {} },
-            { label: "example6", callback: () => {} },
-            { label: "example7", callback: () => {} },
+            { label: "WWWWWWWWWWWW", callback: () => {} },
+            { label: "Second Option", callback: () => {} },
+            { label: "Third Option", callback: () => {} },
           ]}
         />
       )}

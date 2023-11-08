@@ -1,12 +1,25 @@
 import styled from "@emotion/styled";
 import { ButtonBase, css } from "@mui/material";
 
+export const SSButtonWrapper = styled(ButtonBase)`
+  width: 64px;
+  height: 10px;
+  border-radius: 1rem;
+  background-color: var(--lightColor);
+  box-shadow: inset 0 0 0 1px var(--mediumColor),
+    inset 1px 1px 4px 0px var(--bgColor);
+  transform: rotate(-22.5deg);
+  :first-of-type {
+    transform: rotate(-22.5deg) translateX(-16px);
+  }
+`;
+
 export const ArrowButtonWrapper = styled(ButtonBase)<{
   rotation: string;
   position: "up" | "left" | "right" | "down";
 }>`
-  height: 40px;
-  width: 40px;
+  height: 36px;
+  width: 36px;
   display: grid;
   place-items: center;
   border-radius: 0.25rem;
