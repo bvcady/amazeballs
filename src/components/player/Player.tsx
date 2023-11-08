@@ -60,6 +60,9 @@ export const Player = () => {
           }
         )
         .eventCallback("onStart", () => {
+          if (nMovement === 0) {
+            toggleIsSliding(true);
+          }
           toggleAllowInput(false);
         })
         .eventCallback("onComplete", () => {
@@ -72,14 +75,20 @@ export const Player = () => {
     }
   }, [player, nMovement]);
 
-  const left =
+  const slideLeft =
     slideDirection.direction === "x" && slideDirection.increment === -1;
-  const right =
+  const slideRight =
     slideDirection.direction === "x" && slideDirection.increment === 1;
-  const up =
+  const slideUp =
     slideDirection.direction === "y" && slideDirection.increment === -1;
-  const down =
+  const slideDown =
     slideDirection.direction === "y" && slideDirection.increment === 1;
+
+  const direction = player?.direction;
+  const walkLeft = direction === "left";
+  const walkRight = direction === "right";
+  const walkUp = direction === "up";
+  const walkDown = direction === "down";
 
   return (
     <>
@@ -93,20 +102,38 @@ export const Player = () => {
             <ellipse cx={16} cy={24} rx={7} ry={3}></ellipse>
           </svg>
         </ShadowWrapper>
-        {!isSliding && <PlayerIdle />}
-        {isSliding && left && <PlayerHorizontalSlide flip />}
-        {isSliding && right && <PlayerHorizontalSlide />}
-        {isSliding && up && <PlayerVerticalSlide flip />}
-        {isSliding && down && <PlayerVerticalSlide />}
+        {!isSliding ? (
+          <>
+            {walkLeft ? <PlayerHorizontalSlide flip /> : null}
+            {walkRight ? <PlayerHorizontalSlide /> : null}
+            {walkUp ? <PlayerHorizontalIdle /> : null}
+            {walkDown ? <PlayerHorizontalIdle flip /> : null}
+          </>
+        ) : null}
+        {isSliding ? (
+          <>
+            {slideLeft ? <PlayerHorizontalSlide flip /> : null}
+            {slideRight ? <PlayerHorizontalSlide /> : null}
+            {slideUp ? <PlayerVerticalSlide flip /> : null}
+            {slideDown ? <PlayerVerticalSlide /> : null}
+          </>
+        ) : null}
         <PlayerWarning {...{ nMovement, playerMessage }} />
       </PlayerWrapper>
     </>
   );
 };
 
-const PlayerIdle = () => {
+interface IPlayerHorizontalIdle {
+  flip?: boolean;
+}
+const PlayerHorizontalIdle = ({ flip }: IPlayerHorizontalIdle) => {
   return (
-    <svg id="player-sprite" viewBox="0 0 32 32">
+    <svg
+      id="player-sprite"
+      viewBox="0 0 32 32"
+      style={{ transform: flip ? "scale(1, -1)" : "unset" }}
+    >
       <g id="bg">
         <rect className="cls-2" x="13" y="13" width="1" height="1" />
         <rect className="cls-2" x="18" y="13" width="1" height="1" />

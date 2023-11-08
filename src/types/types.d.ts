@@ -14,6 +14,7 @@ export type PlayerType = {
   x: number;
   y: number;
   message?: string;
+  direction?: "up" | "down" | "left" | "right";
 };
 
 export type SeedBuilder = (

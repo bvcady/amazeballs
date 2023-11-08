@@ -69,7 +69,7 @@ export const useInitializer = ({ nX }: Props) => {
           )
         ];
 
-      setPlayer(player);
+      setPlayer({ x: player.x, y: player.y, direction: "down", message: "hi" });
       setSaveFile({
         ...saveFile,
         slideDirection: {

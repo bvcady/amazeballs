@@ -10,7 +10,6 @@ export const useMovement = () => {
   const { squares, setSquares } = useMazeStore((state) => state);
   const { player, setPlayer } = useMazeStore((state) => state);
   const { saveFile, setSaveFile } = useMazeStore((state) => state);
-  const { allowInput } = useUIStore((state) => state);
   const { nMovement = 0 } = saveFile;
   const { slideDirection } = saveFile;
   const { nHealth } = saveFile;
@@ -171,6 +170,21 @@ export const useMovement = () => {
       ? "y"
       : "x";
 
+    const getDir = () => {
+      if (direction === "x" && increment === -1) {
+        return "left";
+      }
+      if (direction === "x" && increment === 1) {
+        return "right";
+      }
+      if (direction === "y" && increment === -1) {
+        return "up";
+      }
+      if (direction === "y" && increment === 1) {
+        return "down";
+      }
+    };
+
     const handleStep = () => {
       const exists = findExistingSquare(direction, 0, increment);
       if (exists && !exists.isWall && !exists.isLavaSource && player) {
@@ -185,7 +199,8 @@ export const useMovement = () => {
         }
         return setPlayer({
           ...player,
-          [direction]: player?.[direction] + increment,
+          direction: getDir(),
+          [direction]: (player?.[direction] || 0) + increment,
           message: exists.hasLava ? "ouch" : undefined,
         });
       }
