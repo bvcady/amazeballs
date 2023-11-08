@@ -22,7 +22,7 @@ export const useKeyPress = ({ callback }: Props) => {
   }, [keyPressed]);
 
   const onKeyUp = (e: KeyboardEvent) => {
-    setKeyPressed(e.key);
+    setKeyPressed(e.key.trim() || e.code.trim());
   };
   const onKeyDown = () => {
     setKeyPressed("");

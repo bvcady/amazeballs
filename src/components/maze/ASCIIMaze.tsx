@@ -10,6 +10,7 @@ import { useTumble } from "@/hooks/useTumble";
 import React, { use, useEffect, useRef, useState } from "react";
 import { useSound } from "use-sound";
 import { gsap } from "gsap";
+import { useUIStore } from "@/store/UIStore";
 
 interface Props {
   squares: SquareType[];
@@ -19,6 +20,7 @@ interface Props {
 
 export const ASCIIMaze = ({ squares, nX }: Props) => {
   const { player, saveFile } = useMazeStore((state) => state);
+  const { menuOpen } = useUIStore((state) => state);
   const { nMovement } = saveFile;
   const [previousTranslation, setPreviousTranslation] = useState({
     x: 0,
@@ -43,9 +45,11 @@ export const ASCIIMaze = ({ squares, nX }: Props) => {
   useEffect(() => {
     const cellSize = 32;
 
+    const dMenu = menuOpen ? -1.75 * 32 : 0;
+
     const translation = player
       ? {
-          x: -player?.x * cellSize + 3.125 * cellSize,
+          x: -player?.x * cellSize + 3.125 * cellSize + dMenu,
           y: -player?.y * cellSize + 3.125 * cellSize,
         }
       : { x: 0, y: 0 };
@@ -67,7 +71,7 @@ export const ASCIIMaze = ({ squares, nX }: Props) => {
         y: translation.y,
       });
     }
-  }, [player]);
+  }, [player, menuOpen]);
 
   const { tumble } = useTumble();
 

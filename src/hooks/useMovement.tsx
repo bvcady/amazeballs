@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import { debounce } from "@mui/material";
 import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 import useSound from "use-sound";
+import { useUIStore } from "@/store/UIStore";
 
 export const useMovement = () => {
   const { squares, setSquares } = useMazeStore((state) => state);
   const { player, setPlayer } = useMazeStore((state) => state);
   const { saveFile, setSaveFile } = useMazeStore((state) => state);
-
+  const { menuOpen, toggleMenuOpen } = useUIStore((state) => state);
   const { nMovement = 0 } = saveFile;
   const { slideDirection } = saveFile;
   const { nHealth } = saveFile;
@@ -20,6 +21,13 @@ export const useMovement = () => {
   const [playHit] = useSound("sounds/hit.wav");
   const [playLava] = useSound("sounds/lava-step.wav");
   const [playSlide] = useSound("sounds/slide.wav");
+
+  const keyHandler = (key: string) => {
+    if (key === "Space") {
+      toggleMenuOpen(!menuOpen);
+    }
+    return moveHandler(key);
+  };
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout> | null = null;
@@ -197,9 +205,7 @@ export const useMovement = () => {
   };
 
   useKeyPress({
-    callback: () => {
-      debounce(moveHandler, 50);
-    },
+    callback: keyHandler,
   });
 
   return {
