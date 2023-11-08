@@ -11,7 +11,7 @@ export const Player = () => {
     (state) => state
   );
   const { toggleAllowInput } = useUIStore((state) => state);
-  const { nMovement, slideDirection } = saveFile;
+  const { nMovement, nHealth, slideDirection } = saveFile;
   const [previousPlayer, setPreviousPlayer] = useState({
     x: 0,
     y: 0,
@@ -21,6 +21,15 @@ export const Player = () => {
 
   // Intend to make animated sprite for idle, walking and sliding in each direction.
   // Animate with GSAP
+
+  useEffect(() => {
+    if (nHealth === 0) {
+      toggleAllowInput(false);
+    }
+    if (nHealth > 0) {
+      toggleAllowInput(true);
+    }
+  }, [nHealth === 0]);
 
   useEffect(() => {
     if (player && playerRef.current) {
@@ -46,7 +55,7 @@ export const Player = () => {
           {
             top: player.y * 32 + 32 + d.y,
             left: player.x * 32 + 32 + d.x,
-            duration: 0.66,
+            duration: 0.45,
             ease: "steps(2)",
           }
         )
@@ -54,7 +63,7 @@ export const Player = () => {
           toggleAllowInput(false);
         })
         .eventCallback("onComplete", () => {
-          if (nMovement !== 0) {
+          if (nMovement !== 0 && nHealth !== 0) {
             toggleIsSliding(false);
             toggleAllowInput(true);
           }

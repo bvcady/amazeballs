@@ -98,7 +98,7 @@ export default function Home() {
                 gap: "0.5rem",
               }}
             >
-              <SSButton callback={() => toggleMenuOpen(!menuOpen)} />
+              <SSButton callback={() => moveHandler("Space")} />
               <SSButton callback={() => null} />
             </div>
             <div></div>
