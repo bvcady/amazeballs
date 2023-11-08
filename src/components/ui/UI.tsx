@@ -33,15 +33,18 @@ export const UI = () => {
           barName: "Health",
         }}
       />
-      <MiniMap {...{ squares, player }} />
+
       {menuOpen && (
-        <Menu
-          options={[
-            { label: "WWWWWWWWWWWW", callback: () => {} },
-            { label: "Second Option", callback: () => {} },
-            { label: "Third Option", callback: () => {} },
-          ]}
-        />
+        <>
+          <MiniMap {...{ squares, player }} />
+          <Menu
+            options={[
+              { label: "WWWWWWWWWWWW", callback: () => {} },
+              { label: "Second Option", callback: () => {} },
+              { label: "Third Option", callback: () => {} },
+            ]}
+          />
+        </>
       )}
       <SlideDirectionIndicator />
     </UIWrapper>

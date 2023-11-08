@@ -49,11 +49,11 @@ export const Player = () => {
         .fromTo(
           playerRef.current,
           {
-            top: previousPlayer.y * 32 + 32 + d.y,
+            top: 4 + previousPlayer.y * 32 + 32 + d.y,
             left: previousPlayer.x * 32 + 32 + d.x,
           },
           {
-            top: player.y * 32 + 32 + d.y,
+            top: 4 + player.y * 32 + 32 + d.y,
             left: player.x * 32 + 32 + d.x,
             duration: 0.45,
             ease: "steps(2)",
@@ -88,17 +88,17 @@ export const Player = () => {
         ref={playerRef}
         id={"Player"}
       >
+        <ShadowWrapper>
+          <svg viewBox="0 0 32 32">
+            <ellipse cx={16} cy={24} rx={7} ry={3}></ellipse>
+          </svg>
+        </ShadowWrapper>
         {!isSliding && <PlayerIdle />}
         {isSliding && left && <PlayerHorizontalSlide flip />}
         {isSliding && right && <PlayerHorizontalSlide />}
         {isSliding && up && <PlayerVerticalSlide flip />}
         {isSliding && down && <PlayerVerticalSlide />}
         <PlayerWarning {...{ nMovement, playerMessage }} />
-        <ShadowWrapper>
-          <svg viewBox="0 0 32 32">
-            <ellipse cx={16} cy={24} rx={9} ry={3}></ellipse>
-          </svg>
-        </ShadowWrapper>
       </PlayerWrapper>
     </>
   );

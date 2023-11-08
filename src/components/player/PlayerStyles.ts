@@ -65,6 +65,6 @@ export const ShadowWrapper = styled("div")`
   mix-blend-mode: darken;
 
   ellipse {
-    fill: var(--mediumColor);
+    fill: var(--darkColor);
   }
 `;

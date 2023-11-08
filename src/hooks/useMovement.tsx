@@ -10,7 +10,6 @@ export const useMovement = () => {
   const { squares, setSquares } = useMazeStore((state) => state);
   const { player, setPlayer } = useMazeStore((state) => state);
   const { saveFile, setSaveFile } = useMazeStore((state) => state);
-  const { menuOpen, toggleMenuOpen } = useUIStore((state) => state);
   const { allowInput } = useUIStore((state) => state);
   const { nMovement = 0 } = saveFile;
   const { slideDirection } = saveFile;
@@ -21,16 +20,6 @@ export const useMovement = () => {
   const [playHit] = useSound("sounds/hit.wav");
   const [playLava] = useSound("sounds/lava-step.wav");
   const [playSlide] = useSound("sounds/slide.wav");
-
-  const keyHandler = (key: string) => {
-    if (!allowInput) {
-      return;
-    }
-    if (key === "Space") {
-      toggleMenuOpen(!menuOpen);
-    }
-    return moveHandler(key);
-  };
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout> | null = null;
@@ -208,12 +197,8 @@ export const useMovement = () => {
     handleStep();
   };
 
-  useKeyPress({
-    callback: allowInput ? keyHandler : () => null,
-  });
-
   return {
-    moveHandler: keyHandler,
+    moveHandler,
     slide,
     keyHistory,
   };

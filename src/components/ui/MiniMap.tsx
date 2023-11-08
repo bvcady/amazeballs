@@ -10,19 +10,20 @@ interface Props {
 export const MiniMap = ({ squares, player }: Props) => {
   return (
     <Wrapper>
-      {squares?.map(({ x, y, isLavaSource, isWall }) => (
+      {squares?.map(({ x, y, isLavaSource, isWall, hasLava }) => (
         <div
           key={`minimap-${x}-${y}`}
           style={{
-            width: "2px",
-            height: "2px",
-            borderRadius: player?.x === x && player?.y === y ? "1px" : "0px",
+            width: "4px",
+            height: "4px",
             background: isWall
               ? theme.colors.light
               : isLavaSource
               ? "tomato"
               : player?.x === x && player?.y === y
               ? theme.colors.accent
+              : hasLava
+              ? "rgba(255,40, 0, 0.4)"
               : "transparent",
           }}
         ></div>
@@ -34,11 +35,10 @@ export const MiniMap = ({ squares, player }: Props) => {
 const Wrapper = styled("div")`
   padding: 2px;
   border-radius: 2px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--darkColor);
   width: fit-content;
   display: grid;
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(20, 1fr);
-  row-gap: 0.5px;
-  column-gap: 0.5px;
+  gap: 1px;
 `;

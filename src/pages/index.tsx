@@ -2,7 +2,7 @@
 import Head from "next/head";
 import { useInitializer } from "@/hooks/useInitializer";
 import { ASCIIMaze } from "@/components/maze/ASCIIMaze";
-import { useMovement } from "@/hooks/useMovement";
+import { useInput } from "@/hooks/useInput";
 import { ViewPort } from "@/components/viewport/ViewPort";
 import { ArrowButton } from "@/components/console/controls/buttons/ArrowButton";
 import { DirectionalPad } from "@/components/console/controls/buttons/DirectionalPad";
@@ -24,13 +24,12 @@ export default function Home() {
   const { squares, nX, reload, seedBuilder } = useInitializer({ nX: 20 });
   const { saveFile } = useMazeStore((state) => state);
   const { seed } = saveFile;
-  const { menuOpen, toggleMenuOpen } = useUIStore((state) => state);
 
   useEffect(() => {
     reload();
   }, [seed]);
 
-  const { moveHandler } = useMovement();
+  const { inputHandler } = useInput();
 
   return (
     <>
@@ -72,22 +71,22 @@ export default function Home() {
             <DirectionalPad>
               <ArrowButton
                 position="left"
-                callback={() => moveHandler("ArrowLeft")}
+                callback={() => inputHandler("ArrowLeft")}
                 rotation="270deg"
               />
               <ArrowButton
                 position="up"
-                callback={() => moveHandler("ArrowUp")}
+                callback={() => inputHandler("ArrowUp")}
                 rotation="0deg"
               />
               <ArrowButton
                 position="right"
-                callback={() => moveHandler("ArrowRight")}
+                callback={() => inputHandler("ArrowRight")}
                 rotation="90deg"
               />
               <ArrowButton
                 position="down"
-                callback={() => moveHandler("ArrowDown")}
+                callback={() => inputHandler("ArrowDown")}
                 rotation="180deg"
               />
             </DirectionalPad>
@@ -98,7 +97,7 @@ export default function Home() {
                 gap: "0.5rem",
               }}
             >
-              <SSButton callback={() => moveHandler("Space")} />
+              <SSButton callback={() => inputHandler("Space")} />
               <SSButton callback={() => null} />
             </div>
             <div></div>

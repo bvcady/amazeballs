@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import { ButtonBase, css } from "@mui/material";
 
 export const SSButtonWrapper = styled(ButtonBase)`
-  width: 64px;
-  height: 10px;
+  width: 56px;
+  height: 12px;
   border-radius: 1rem;
   background-color: var(--lightColor);
   box-shadow: inset 0 0 0 1px var(--mediumColor),
