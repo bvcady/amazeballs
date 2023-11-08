@@ -25,14 +25,14 @@ export const Wall = ({ cracked = false, rotation, x, y }: Props) => {
     const leftVal = 32 + x * 32;
 
     if (nMovement === 0) {
-      if (slideDirection.direction === "x") {
+      if (slideDirection.direction === "y") {
         gsap.to(wallRef.current, {
           top: topVal + deltaTop * (y >= 10 ? -1 : 1),
           ease: `steps(${Math.abs(10 - y) || 1})`,
           delay: `${30 + 60 * Math.random()}ms`,
         });
       }
-      if (slideDirection.direction === "y") {
+      if (slideDirection.direction === "x") {
         gsap.to(wallRef.current, {
           left: leftVal + deltaLeft * (x >= 10 ? -1 : 1),
           ease: `steps(${Math.abs(10 - x) || 1})`,

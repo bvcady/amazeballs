@@ -35,11 +35,11 @@ export const Player = () => {
     if (player && playerRef.current) {
       let d = { x: 0, y: 0 };
       if (nMovement === 0) {
-        if (slideDirection.direction === "y") {
+        if (slideDirection.direction === "x") {
           d.x = Math.abs(10 - player.x);
           d.y = 0;
         }
-        if (slideDirection.direction === "x") {
+        if (slideDirection.direction === "y") {
           d.y = Math.abs(10 - player.y);
           d.x = 0;
         }
