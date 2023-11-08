@@ -7,11 +7,12 @@ import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 import { Menu } from "../menu/Menu";
 
 import { useUIStore } from "@/store/UIStore";
+import { MiniMap } from "./MiniMap";
 
 export const UI = () => {
   const totalEnergy = defaultPlayerInfo.nMovement;
   const totalHealth = defaultPlayerInfo.nHealth;
-  const { saveFile } = useMazeStore((state) => state);
+  const { saveFile, squares, player } = useMazeStore((state) => state);
   const { nMovement, nHealth } = saveFile;
   const { menuOpen } = useUIStore((state) => state);
 
@@ -32,6 +33,7 @@ export const UI = () => {
           barName: "Health",
         }}
       />
+      <MiniMap {...{ squares, player }} />
       {menuOpen && (
         <Menu
           options={[
