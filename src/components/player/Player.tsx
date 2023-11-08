@@ -4,9 +4,13 @@ import { PlayerWrapper, ShadowWrapper } from "./PlayerStyles";
 import { PlayerWarning } from "./PlayerWarning";
 import { gsap } from "gsap";
 import { useEffect, useRef, useState } from "react";
+import { useUIStore } from "@/store/UIStore";
 
 export const Player = () => {
-  const { saveFile, player } = useMazeStore((state) => state);
+  const { saveFile, player, isSliding, toggleIsSliding } = useMazeStore(
+    (state) => state
+  );
+  const { toggleAllowInput } = useUIStore((state) => state);
   const { nMovement, slideDirection } = saveFile;
   const [previousPlayer, setPreviousPlayer] = useState({
     x: 0,
@@ -31,20 +35,30 @@ export const Player = () => {
           d.x = 0;
         }
       }
-      console.log(d);
-      gsap.fromTo(
-        playerRef.current,
-        {
-          top: previousPlayer.y * 32 + 32 + d.y,
-          left: previousPlayer.x * 32 + 32 + d.x,
-        },
-        {
-          top: player.y * 32 + 32 + d.y,
-          left: player.x * 32 + 32 + d.x,
-          duration: 0.66,
-          ease: "steps(2)",
-        }
-      );
+
+      gsap
+        .fromTo(
+          playerRef.current,
+          {
+            top: previousPlayer.y * 32 + 32 + d.y,
+            left: previousPlayer.x * 32 + 32 + d.x,
+          },
+          {
+            top: player.y * 32 + 32 + d.y,
+            left: player.x * 32 + 32 + d.x,
+            duration: 0.66,
+            ease: "steps(2)",
+          }
+        )
+        .eventCallback("onStart", () => {
+          toggleAllowInput(false);
+        })
+        .eventCallback("onComplete", () => {
+          if (nMovement !== 0) {
+            toggleIsSliding(false);
+            toggleAllowInput(true);
+          }
+        });
       setPreviousPlayer({ x: player.x, y: player.y });
     }
   }, [player, nMovement]);
@@ -65,11 +79,11 @@ export const Player = () => {
         ref={playerRef}
         id={"Player"}
       >
-        {nMovement > 0 && <PlayerIdle />}
-        {nMovement === 0 && left && <PlayerHorizontalSlide flip />}
-        {nMovement === 0 && right && <PlayerHorizontalSlide />}
-        {nMovement === 0 && up && <PlayerVerticalSlide flip />}
-        {nMovement === 0 && down && <PlayerVerticalSlide />}
+        {!isSliding && <PlayerIdle />}
+        {isSliding && left && <PlayerHorizontalSlide flip />}
+        {isSliding && right && <PlayerHorizontalSlide />}
+        {isSliding && up && <PlayerVerticalSlide flip />}
+        {isSliding && down && <PlayerVerticalSlide />}
         <PlayerWarning {...{ nMovement, playerMessage }} />
         <ShadowWrapper>
           <svg viewBox="0 0 32 32">

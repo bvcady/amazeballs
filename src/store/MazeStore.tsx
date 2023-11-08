@@ -19,9 +19,12 @@ type ZustandState = {
   setPlayer: (input: PlayerType) => void;
   saveFile: SaveFile;
   setSaveFile: (input: SaveFile) => void;
+  isSliding: boolean;
+  toggleIsSliding: (input: boolean) => void;
 };
 
 export const useMazeStore = create<ZustandState>((set) => ({
+  isSliding: false,
   player: undefined,
   squares: [],
   setSquares: (squares) => set({ squares }),
@@ -36,6 +39,7 @@ export const useMazeStore = create<ZustandState>((set) => ({
     },
     nSlides: 0,
   },
+  toggleIsSliding: (isSliding) => set({ isSliding }),
   setSaveFile: (saveFile) => {
     return set({ saveFile });
   },

@@ -2,7 +2,6 @@ import { useMazeStore } from "@/store/MazeStore";
 import { SquareType } from "@/types/types";
 import { useKeyPress } from "./useKeyPress";
 import { useEffect, useState } from "react";
-import { debounce } from "@mui/material";
 import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 import useSound from "use-sound";
 import { useUIStore } from "@/store/UIStore";
@@ -12,6 +11,7 @@ export const useMovement = () => {
   const { player, setPlayer } = useMazeStore((state) => state);
   const { saveFile, setSaveFile } = useMazeStore((state) => state);
   const { menuOpen, toggleMenuOpen } = useUIStore((state) => state);
+  const { allowInput } = useUIStore((state) => state);
   const { nMovement = 0 } = saveFile;
   const { slideDirection } = saveFile;
   const { nHealth } = saveFile;
@@ -23,6 +23,9 @@ export const useMovement = () => {
   const [playSlide] = useSound("sounds/slide.wav");
 
   const keyHandler = (key: string) => {
+    if (!allowInput) {
+      return;
+    }
     if (key === "Space") {
       toggleMenuOpen(!menuOpen);
     }
@@ -41,7 +44,7 @@ export const useMovement = () => {
     };
   }, [nMovement]);
 
-  const updateEnemies = () => {
+  const updateEnvironment = () => {
     const lavaSquares = squares.filter((square) => square.hasLava);
 
     const lavaGrowth = Array.from(
@@ -140,7 +143,8 @@ export const useMovement = () => {
       },
       nSlides: saveFile.nSlides + 1,
     });
-    updateEnemies();
+
+    updateEnvironment();
   };
 
   const moveHandler = (key: string | undefined) => {
@@ -205,11 +209,11 @@ export const useMovement = () => {
   };
 
   useKeyPress({
-    callback: keyHandler,
+    callback: allowInput ? keyHandler : () => null,
   });
 
   return {
-    moveHandler,
+    moveHandler: keyHandler,
     slide,
     keyHistory,
   };
