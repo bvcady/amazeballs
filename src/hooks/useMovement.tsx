@@ -206,7 +206,7 @@ export const useMovement = () => {
         });
       }
       return setPlayer({
-        ...player,
+        ...(player || { x: 0, y: 0 }),
         direction: playerDirection,
       });
     };
