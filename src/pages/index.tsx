@@ -16,15 +16,15 @@ import { ScreenPadding } from "@/components/console/Console.styles";
 import { Grate } from "@/components/console/Grate";
 import { SSButton } from "@/components/console/controls/buttons/SSButton";
 import { ButtonArea } from "@/components/console/ButtonArea";
-import { useUIStore } from "@/store/UIStore";
 import { LetterButton } from "@/components/console/controls/buttons/LetterButton";
 import { theme } from "@/styles/Global";
 
-export default function Home() {
+export default function Home({ ...props }) {
   const { setNewSeed } = useSeeding();
 
   const { squares, nX, reload, seedBuilder } = useInitializer({ nX: 20 });
-  const { saveFile } = useMazeStore((state) => state);
+  const store = useMazeStore((state) => state);
+  const { saveFile } = store;
   const { seed } = saveFile;
 
   useEffect(() => {

@@ -20,6 +20,7 @@ interface Props {
 
 export const ASCIIMaze = ({ squares, nX }: Props) => {
   const { player, saveFile } = useMazeStore((state) => state);
+
   const { menuOpen } = useUIStore((state) => state);
   const { nMovement } = saveFile;
   const [previousTranslation, setPreviousTranslation] = useState({
@@ -27,18 +28,18 @@ export const ASCIIMaze = ({ squares, nX }: Props) => {
     y: 0,
   });
 
-  const [play, { sound }] = useSound(
-    "sounds/Ethan Alexander Harris - flashing lights in a park after dark.mp3",
-    {
-      volume: 0.2,
-    }
-  );
+  // const [play, { sound }] = useSound(
+  //   "sounds/Ethan Alexander Harris - flashing lights in a park after dark.mp3",
+  //   {
+  //     volume: 0.2,
+  //   }
+  // );
 
-  useEffect(() => {
-    if (sound) {
-      // play();
-    }
-  }, [sound]);
+  // useEffect(() => {
+  //   if (sound) {
+  //     // play();
+  //   }
+  // }, [sound]);
 
   const mapRef = useRef<HTMLDivElement>(null);
 
@@ -73,7 +74,11 @@ export const ASCIIMaze = ({ squares, nX }: Props) => {
     }
   }, [player, menuOpen]);
 
-  const { tumble } = useTumble();
+  const { tumble } = useTumble(nMovement === 0);
+
+  useEffect(() => {
+    console.log("change");
+  }, [tumble]);
 
   return (
     <div

@@ -25,7 +25,7 @@ type ZustandState = {
 
 export const useMazeStore = create<ZustandState>((set) => ({
   isSliding: false,
-  player: undefined,
+  player: { x: 0, y: 0 },
   squares: [],
   setSquares: (squares) => set({ squares }),
   setPlayer: (player) => set({ player }),

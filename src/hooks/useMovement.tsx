@@ -1,6 +1,5 @@
 import { useMazeStore } from "@/store/MazeStore";
 import { SquareType } from "@/types/types";
-import { useKeyPress } from "./useKeyPress";
 import { useEffect, useState } from "react";
 import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 import useSound from "use-sound";
@@ -185,6 +184,8 @@ export const useMovement = () => {
       }
     };
 
+    const playerDirection = getDir();
+
     const handleStep = () => {
       const exists = findExistingSquare(direction, 0, increment);
       if (exists && !exists.isWall && !exists.isLavaSource && player) {
@@ -199,11 +200,15 @@ export const useMovement = () => {
         }
         return setPlayer({
           ...player,
-          direction: getDir(),
+          direction: playerDirection,
           [direction]: (player?.[direction] || 0) + increment,
           message: exists.hasLava ? "ouch" : undefined,
         });
       }
+      return setPlayer({
+        ...player,
+        direction: playerDirection,
+      });
     };
     if (nMovement === 1) {
       playSlide({ playbackRate: 0.9 + Math.random() * 0.2 });

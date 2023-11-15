@@ -17,6 +17,10 @@ export const useInput = () => {
       return toggleMenuOpen(!menuOpen);
     }
 
+    if (menuOpen) {
+      return;
+    }
+
     return moveHandler(key);
   };
 
