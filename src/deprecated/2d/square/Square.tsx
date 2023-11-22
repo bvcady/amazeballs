@@ -1,7 +1,7 @@
 import { SquareType } from "@/types/types";
 import { SquareWrapper } from "./Square.styled";
 import { Player } from "../player/Player";
-import { useMazeStore } from "@/store/MazeStore";
+import { useMazeStore } from "@/store/GameStore";
 import { getWallEdges } from "@/services/getWallEdges";
 import { getLavaEdges } from "@/services/getLavaEdges";
 import { Wall } from "../wall/Wall";

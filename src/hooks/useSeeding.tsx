@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useMazeStore } from "@/store/MazeStore";
+import { useGameStore } from "@/store/GameStore";
 import { useLocalStorage } from "./useLocalStorage";
 import { useEffect } from "react";
 import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
@@ -7,7 +7,7 @@ import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 export const useSeeding = () => {
   const [seed, setSeed] = useLocalStorage("maze-seed", null);
 
-  const { saveFile, setSaveFile } = useMazeStore((state) => state);
+  const { saveFile, setSaveFile } = useGameStore((state) => state);
 
   const { nMovement, nHealth } = defaultPlayerInfo;
 

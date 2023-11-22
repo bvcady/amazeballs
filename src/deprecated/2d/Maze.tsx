@@ -1,4 +1,4 @@
-import { useMazeStore } from "@/store/MazeStore";
+import { useMazeStore } from "@/store/GameStore";
 import { useMovement } from "@/hooks/useMovement";
 import { useInitializer } from "@/hooks/useInitializer";
 import { MazeWrapper } from "./Maze.styled";

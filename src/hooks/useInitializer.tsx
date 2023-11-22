@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useMazeStore } from "@/store/MazeStore";
+import { useGameStore } from "@/store/GameStore";
 import { useEffect, useState } from "react";
 import * as seedInitilizer from "random-seed";
 import { SquareType } from "@/types/types";
@@ -10,9 +10,9 @@ interface Props {
 export const useInitializer = ({ nX }: Props) => {
   const [squareSize, setSquareSize] = useState(0);
 
-  const { setSquares, squares } = useMazeStore((state) => state);
-  const { setPlayer } = useMazeStore((state) => state);
-  const { saveFile, setSaveFile } = useMazeStore((state) => state);
+  const { setSquares, squares } = useGameStore((state) => state);
+  const { setPlayer } = useGameStore((state) => state);
+  const { saveFile, setSaveFile } = useGameStore((state) => state);
 
   const { seed } = saveFile;
 

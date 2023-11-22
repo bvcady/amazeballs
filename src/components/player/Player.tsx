@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useMazeStore } from "@/store/MazeStore";
+import { useGameStore } from "@/store/GameStore";
 import { PlayerWrapper, ShadowWrapper } from "./PlayerStyles";
 import { PlayerWarning } from "./PlayerWarning";
 import { gsap } from "gsap";
@@ -8,7 +8,7 @@ import { useUIStore } from "@/store/UIStore";
 import playerSpriteSheet from "../../../public/sprites/new-sprite-player.json";
 
 export const Player = () => {
-  const { saveFile, player, isSliding, toggleIsSliding } = useMazeStore(
+  const { saveFile, player, isSliding, toggleIsSliding } = useGameStore(
     (state) => state
   );
   const { toggleAllowInput } = useUIStore((state) => state);
@@ -98,11 +98,9 @@ export const Player = () => {
     const meta = playerSpriteSheet?.meta?.frameTags?.find(
       (tag) => tag.name === dir
     );
-    console.log({ meta });
     const sprite = playerSprites.filter(
       (_, index) => index <= (meta?.to || 0) && index >= (meta?.from || 0)
     );
-    console.log({ sprite });
     return sprite;
   };
 
@@ -124,8 +122,6 @@ export const Player = () => {
   const frames = getPlayerFrames();
   const x = frames?.[0]?.frame.x || 0;
   const y = frames?.[0]?.frame.y || 0;
-
-  console.log({ direction, x, y });
 
   return (
     <>

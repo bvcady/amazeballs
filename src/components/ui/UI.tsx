@@ -1,4 +1,4 @@
-import { useMazeStore } from "@/store/MazeStore";
+import { useGameStore } from "@/store/GameStore";
 import { ChipBar } from "./ChipBar";
 import styled from "@emotion/styled";
 import { SlideDirectionIndicator } from "./SlideDirectionIndicator";
@@ -12,7 +12,7 @@ import { MiniMap } from "./MiniMap";
 export const UI = () => {
   const totalEnergy = defaultPlayerInfo.nMovement;
   const totalHealth = defaultPlayerInfo.nHealth;
-  const { saveFile, squares, player } = useMazeStore((state) => state);
+  const { saveFile, squares, player } = useGameStore((state) => state);
   const { nMovement, nHealth } = saveFile;
   const { menuOpen } = useUIStore((state) => state);
 

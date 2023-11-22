@@ -1,14 +1,13 @@
-import { useMazeStore } from "@/store/MazeStore";
+import { useGameStore } from "@/store/GameStore";
 import { SquareType } from "@/types/types";
 import { useEffect, useState } from "react";
 import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 import useSound from "use-sound";
-import { useUIStore } from "@/store/UIStore";
 
 export const useMovement = () => {
-  const { squares, setSquares } = useMazeStore((state) => state);
-  const { player, setPlayer } = useMazeStore((state) => state);
-  const { saveFile, setSaveFile } = useMazeStore((state) => state);
+  const { squares, setSquares } = useGameStore((state) => state);
+  const { player, setPlayer } = useGameStore((state) => state);
+  const { saveFile, setSaveFile } = useGameStore((state) => state);
   const { nMovement = 0 } = saveFile;
   const { slideDirection } = saveFile;
   const { nHealth } = saveFile;

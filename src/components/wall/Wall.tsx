@@ -1,7 +1,7 @@
 import { WallBase } from "./WallBase";
 import { WallWrapper } from "./Wall.Styled";
 import * as Walls from "./WallTypes";
-import { useMazeStore } from "@/store/MazeStore";
+import { useGameStore } from "@/store/GameStore";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const Wall = ({ cracked = false, rotation, x, y }: Props) => {
-  const { saveFile } = useMazeStore((state) => state);
+  const { saveFile } = useGameStore((state) => state);
   const { nMovement, slideDirection } = saveFile;
 
   const wallRef = useRef<HTMLDivElement>(null);

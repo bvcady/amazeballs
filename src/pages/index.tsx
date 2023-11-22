@@ -6,7 +6,7 @@ import { useInput } from "@/hooks/useInput";
 import { ViewPort } from "@/components/viewport/ViewPort";
 import { ArrowButton } from "@/components/console/controls/buttons/ArrowButton";
 import { DirectionalPad } from "@/components/console/controls/buttons/DirectionalPad";
-import { useMazeStore } from "@/store/MazeStore";
+import { useGameStore } from "@/store/GameStore";
 import { Button } from "@mui/material";
 import { useEffect } from "react";
 import { useSeeding } from "@/hooks/useSeeding";
@@ -23,7 +23,7 @@ export default function Home({ ...props }) {
   const { setNewSeed } = useSeeding();
 
   const { squares, nX, reload, seedBuilder } = useInitializer({ nX: 20 });
-  const store = useMazeStore((state) => state);
+  const store = useGameStore((state) => state);
   const { saveFile } = store;
   const { seed } = saveFile;
 

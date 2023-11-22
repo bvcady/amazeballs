@@ -1,6 +1,5 @@
 import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
 import { PlayerType, SquareType } from "@/types/types";
-import { RandomSeed } from "random-seed";
 import { create } from "zustand";
 
 type SaveFile = {
@@ -23,7 +22,7 @@ type ZustandState = {
   toggleIsSliding: (input: boolean) => void;
 };
 
-export const useMazeStore = create<ZustandState>((set) => ({
+export const useGameStore = create<ZustandState>((set) => ({
   isSliding: false,
   player: { x: 0, y: 0 },
   squares: [],

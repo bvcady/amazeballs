@@ -1,11 +1,11 @@
-import { useMazeStore } from "@/store/MazeStore";
+import { useGameStore } from "@/store/GameStore";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 
 export const Blur = () => {
   const [blur, setBlur] = useState("0px");
 
-  const { saveFile, player } = useMazeStore((state) => state);
+  const { saveFile, player } = useGameStore((state) => state);
   const { nHealth } = saveFile;
 
   const playerIsDead = nHealth <= 0;

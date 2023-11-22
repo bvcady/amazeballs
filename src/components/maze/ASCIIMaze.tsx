@@ -4,7 +4,7 @@ import { CellWrapper } from "@/styles/shared/Shared.styles";
 import { Wall } from "../wall/Wall";
 import { Lava } from "../lava/Lava";
 import { Floor } from "../floor/Floor";
-import { useMazeStore } from "@/store/MazeStore";
+import { useGameStore } from "@/store/GameStore";
 import { Player } from "../player/Player";
 import { useTumble } from "@/hooks/useTumble";
 import React, { use, useEffect, useRef, useState } from "react";
@@ -19,8 +19,7 @@ interface Props {
 }
 
 export const ASCIIMaze = ({ squares, nX }: Props) => {
-  const { player, saveFile } = useMazeStore((state) => state);
-
+  const { player, saveFile } = useGameStore((state) => state);
   const { menuOpen } = useUIStore((state) => state);
   const { nMovement } = saveFile;
   const [previousTranslation, setPreviousTranslation] = useState({
@@ -75,10 +74,6 @@ export const ASCIIMaze = ({ squares, nX }: Props) => {
   }, [player, menuOpen]);
 
   const { tumble } = useTumble(nMovement === 0);
-
-  useEffect(() => {
-    console.log("change");
-  }, [tumble]);
 
   return (
     <div

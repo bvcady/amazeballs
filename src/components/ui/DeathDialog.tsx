@@ -1,11 +1,11 @@
 import { useSeeding } from "@/hooks/useSeeding";
-import { useMazeStore } from "@/store/MazeStore";
+import { useGameStore } from "@/store/GameStore";
 import { theme } from "@/styles/Global";
 
 export const DeathDialog = () => {
   const { setNewSeed } = useSeeding();
 
-  const { saveFile } = useMazeStore((state) => state);
+  const { saveFile } = useGameStore((state) => state);
   const { nHealth } = saveFile;
 
   return (

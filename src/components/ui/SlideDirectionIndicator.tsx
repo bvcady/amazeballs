@@ -1,8 +1,8 @@
-import { useMazeStore } from "@/store/MazeStore";
+import { useGameStore } from "@/store/GameStore";
 import styled from "@emotion/styled";
 
 export const SlideDirectionIndicator = () => {
-  const { saveFile } = useMazeStore((state) => state);
+  const { saveFile } = useGameStore((state) => state);
   const { slideDirection } = saveFile;
 
   const rotation = () => {
