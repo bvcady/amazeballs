@@ -33,41 +33,24 @@ export const useMovement = () => {
   const updateEnvironment = () => {
     const lavaSquares = squares.filter((square) => square.hasLava);
 
-    const lavaGrowth = Array.from(
-      new Set(
-        lavaSquares
-          .map((ls) => {
-            const lavaOptions = squares.filter(
-              (square) =>
-                (((square.x === ls.x - 1 || square.x === ls.x + 1) &&
-                  square.y === ls.y) ||
-                  ((square.y === ls.y - 1 || square.y === ls.y + 1) &&
-                    square.x === ls.x)) &&
-                !square.isWall &&
-                !square.isLavaSource &&
-                !square.hasLava
-            );
-            return lavaOptions.slice(
-              Math.floor(Math.random() * (lavaOptions?.length - 1)),
-              1
-            );
-          })
-          .reduce((opts, acc) => {
-            return [...acc, ...opts];
-          }, [])
-      )
-    )
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3);
+    const dX =
+      slideDirection.direction === "x" ? slideDirection.increment || 0 : 0;
+    const dY =
+      slideDirection.direction === "y" ? slideDirection.increment || 0 : 0;
 
-    setSquares(
-      squares.map((square) => {
-        const foundInLavaGrowth = lavaGrowth?.find(
-          (lg) => lg.x === square.x && lg.y === square.y
-        );
-        return foundInLavaGrowth ? { ...square, hasLava: true } : square;
-      })
-    );
+    const newSquares = squares.map((square) => {
+      if (
+        squares.find((s) => s.x === square.x - dX && s.y === square.y - dY)
+          ?.hasLava &&
+        !square?.isWall &&
+        0.5 - Math.random() >= 0
+      ) {
+        return { ...square, hasLava: true };
+      }
+      return square;
+    });
+
+    setSquares(newSquares);
   };
 
   const findExistingSquare = (
