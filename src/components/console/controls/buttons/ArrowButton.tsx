@@ -14,7 +14,10 @@ export const ArrowButton = ({
   return (
     <ArrowButtonWrapper
       {...{ position, rotation }}
-      onClick={callback}
+      onClick={(e) => {
+        e.preventDefault();
+        callback();
+      }}
     ></ArrowButtonWrapper>
   );
 };

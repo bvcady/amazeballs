@@ -6,5 +6,12 @@ interface Props {
 }
 
 export const SSButton = ({ callback }: Props) => {
-  return <SSButtonWrapper onClick={() => callback?.()} />;
+  return (
+    <SSButtonWrapper
+      onClick={(e) => {
+        e.preventDefault();
+        callback?.();
+      }}
+    />
+  );
 };

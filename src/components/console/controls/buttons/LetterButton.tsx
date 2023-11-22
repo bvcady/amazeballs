@@ -8,7 +8,13 @@ interface Props {
 
 export const LetterButton = ({ callback, color, letter }: Props) => {
   return (
-    <LetterButtonWrapper color={color} onClick={() => callback?.()}>
+    <LetterButtonWrapper
+      color={color}
+      onClick={(e) => {
+        e.preventDefault();
+        callback?.();
+      }}
+    >
       {letter.toLocaleUpperCase()}
     </LetterButtonWrapper>
   );
