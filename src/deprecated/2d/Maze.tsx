@@ -1,4 +1,4 @@
-import { useMazeStore } from "@/store/GameStore";
+import { useGameStore } from "@/store/GameStore";
 import { useMovement } from "@/hooks/useMovement";
 import { useInitializer } from "@/hooks/useInitializer";
 import { MazeWrapper } from "./Maze.styled";
@@ -6,7 +6,7 @@ import { Square } from "./square/Square";
 import { LavaLayer } from "./lava/LavaLayer";
 
 export const Maze = () => {
-  const { squares } = useMazeStore((state) => state);
+  const { squares } = useGameStore((state) => state);
 
   useMovement();
   const { squareSize, nX: width } = useInitializer({ nX: 12 });
