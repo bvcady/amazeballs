@@ -11,6 +11,7 @@ export const Player = () => {
   const { saveFile, player, isSliding, toggleIsSliding } = useGameStore(
     (state) => state
   );
+  const [frameCount, setFrameCount] = useState(0);
   const { toggleAllowInput } = useUIStore((state) => state);
   const { nMovement, nHealth, slideDirection } = saveFile;
   const [previousPlayer, setPreviousPlayer] = useState({
@@ -120,8 +121,22 @@ export const Player = () => {
   };
 
   const frames = getPlayerFrames();
-  const x = frames?.[0]?.frame.x || 0;
-  const y = frames?.[0]?.frame.y || 0;
+
+  const frameIndex = frameCount % (frames?.length || 1 - 1);
+  const currentFrame = frames?.[frameIndex]?.frame;
+  const x = currentFrame?.x || 0;
+  const y = currentFrame?.y || 0;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFrameCount((prev) => prev + 1);
+    }, 333);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    setFrameCount(0);
+  }, [isSliding, direction]);
 
   return (
     <>

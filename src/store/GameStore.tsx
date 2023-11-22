@@ -11,7 +11,10 @@ type SaveFile = {
   nSlides: number;
 };
 
+type Phase = "introduction" | "player" | "tilt" | "environment" | "menu";
+
 type ZustandState = {
+  currentPhase: Phase;
   player?: PlayerType;
   squares: SquareType[];
   setSquares: (input: SquareType[]) => void;
@@ -20,14 +23,17 @@ type ZustandState = {
   setSaveFile: (input: SaveFile) => void;
   isSliding: boolean;
   toggleIsSliding: (input: boolean) => void;
+  setPhase: (input: Phase) => void;
 };
 
 export const useGameStore = create<ZustandState>((set) => ({
   isSliding: false,
   player: { x: 0, y: 0 },
+  currentPhase: "introduction",
   squares: [],
   setSquares: (squares) => set({ squares }),
   setPlayer: (player) => set({ player }),
+  setPhase: (currentPhase) => set({ currentPhase }),
   saveFile: {
     layer: 0,
     nMovement: defaultPlayerInfo.nMovement,
