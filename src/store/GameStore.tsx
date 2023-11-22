@@ -1,4 +1,5 @@
 import { defaultPlayerInfo } from "@/constants/defaultPlayerInfo";
+import { theme } from "@/styles/Global";
 import { PlayerType, SquareType } from "@/types/types";
 import { create } from "zustand";
 
@@ -17,6 +18,8 @@ type ZustandState = {
   currentPhase: Phase;
   player?: PlayerType;
   squares: SquareType[];
+  gameColor: string;
+  setGameColor: (input: string) => void;
   setSquares: (input: SquareType[]) => void;
   setPlayer: (input: PlayerType) => void;
   saveFile: SaveFile;
@@ -30,6 +33,8 @@ export const useGameStore = create<ZustandState>((set) => ({
   isSliding: false,
   player: { x: 0, y: 0 },
   currentPhase: "introduction",
+  gameColor: theme.colors.accent,
+  setGameColor: (gameColor) => set({ gameColor }),
   squares: [],
   setSquares: (squares) => set({ squares }),
   setPlayer: (player) => set({ player }),

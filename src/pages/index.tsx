@@ -101,7 +101,7 @@ export default function Home({ ...props }) {
               }}
             >
               <SSButton callback={() => inputHandler("Space")} />
-              <SSButton callback={() => null} />
+              <SSButton callback={() => inputHandler("Select")} />
             </div>
             <div
               style={{
